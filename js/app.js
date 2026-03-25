@@ -3,8 +3,9 @@
 /* Render glossary from data */
 renderGlossary();
 
-/* Update bookmark icons after glossary is rendered */
+/* Update bookmark icons and count after glossary is rendered */
 if (typeof updateBookmarkIcons === 'function') updateBookmarkIcons();
+if (typeof updateBookmarkCount === 'function') updateBookmarkCount();
 
 /* Render tech stack from data */
 renderTechStack();

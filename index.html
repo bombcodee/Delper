@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1인 개발자 종합 가이드</title>
+  <title>Delper — 1인 개발자 종합 가이드</title>
   <meta name="description" content="1인 개발자를 위한 프로세스, 전략, 기술, 운영 종합 가이드">
-  <meta property="og:title" content="1인 개발자 종합 가이드">
+  <meta property="og:title" content="Delper — 1인 개발자 종합 가이드">
   <meta property="og:description" content="개발 프로세스부터 수익화까지, 1인 개발자의 모든 것">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +26,11 @@
 <!-- ===== SIDEBAR ===== -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <h1>DEV GUIDE</h1>
-    <span>v2.0</span>
+    <div class="sidebar-header-top">
+      <h1>Delper</h1>
+      <span>v2.0</span>
+    </div>
+    <div class="sidebar-subtitle">The All-in-One Dev Guide</div>
   </div>
   <nav class="sidebar-nav">
     <div class="nav-section">
@@ -205,21 +208,22 @@
      ================================================================ -->
 <div class="section" id="sec-glossary">
   <h2 class="section-title">용어집</h2>
-  <p class="section-desc">개발 프로세스 전반에서 사용되는 핵심 용어들을 카테고리별로 정리했습니다.</p>
+  <p class="section-desc">개발 프로세스 전반에서 사용되는 핵심 용어 <strong id="glossaryTotal">0</strong>개를 카테고리별로 정리했습니다.</p>
 
   <input type="text" class="glossary-search" id="glossarySearch" placeholder="용어 검색... (예: PRD, MVP, CI/CD)" oninput="filterGlossary()">
 
   <div class="glossary-filters" id="glossaryFilters">
-    <button class="filter-btn active" data-filter="all" onclick="setGlossaryFilter('all')">전체</button>
-    <button class="filter-btn" data-filter="doc" onclick="setGlossaryFilter('doc')">기획 문서</button>
-    <button class="filter-btn" data-filter="method" onclick="setGlossaryFilter('method')">방법론</button>
-    <button class="filter-btn" data-filter="phase" onclick="setGlossaryFilter('phase')">프로세스 단계</button>
-    <button class="filter-btn" data-filter="discovery" onclick="setGlossaryFilter('discovery')">Discovery</button>
-    <button class="filter-btn" data-filter="devpractice" onclick="setGlossaryFilter('devpractice')">Development 실무</button>
-    <button class="filter-btn" data-filter="design-decision" onclick="setGlossaryFilter('design-decision')">설계 결정</button>
-    <button class="filter-btn" data-filter="qa" onclick="setGlossaryFilter('qa')">QA/테스트</button>
-    <button class="filter-btn" data-filter="launch" onclick="setGlossaryFilter('launch')">Launch/배포</button>
-    <button class="filter-btn" data-filter="ops" onclick="setGlossaryFilter('ops')">운영/개선</button>
+    <button class="filter-btn filter-btn--bookmark" data-filter="bookmarked" onclick="setGlossaryFilter('bookmarked')">★ 즐겨찾기(<span id="bookmarkCount">0</span>)</button>
+    <button class="filter-btn active" data-filter="all" onclick="setGlossaryFilter('all')">전체(<span class="filter-count" data-cat="all">0</span>)</button>
+    <button class="filter-btn" data-filter="doc" onclick="setGlossaryFilter('doc')">기획 문서(<span class="filter-count" data-cat="doc">0</span>)</button>
+    <button class="filter-btn" data-filter="method" onclick="setGlossaryFilter('method')">방법론(<span class="filter-count" data-cat="method">0</span>)</button>
+    <button class="filter-btn" data-filter="phase" onclick="setGlossaryFilter('phase')">프로세스 단계(<span class="filter-count" data-cat="phase">0</span>)</button>
+    <button class="filter-btn" data-filter="discovery" onclick="setGlossaryFilter('discovery')">Discovery(<span class="filter-count" data-cat="discovery">0</span>)</button>
+    <button class="filter-btn" data-filter="devpractice" onclick="setGlossaryFilter('devpractice')">Development 실무(<span class="filter-count" data-cat="devpractice">0</span>)</button>
+    <button class="filter-btn" data-filter="design-decision" onclick="setGlossaryFilter('design-decision')">설계 결정(<span class="filter-count" data-cat="design-decision">0</span>)</button>
+    <button class="filter-btn" data-filter="qa" onclick="setGlossaryFilter('qa')">QA/테스트(<span class="filter-count" data-cat="qa">0</span>)</button>
+    <button class="filter-btn" data-filter="launch" onclick="setGlossaryFilter('launch')">Launch/배포(<span class="filter-count" data-cat="launch">0</span>)</button>
+    <button class="filter-btn" data-filter="ops" onclick="setGlossaryFilter('ops')">운영/개선(<span class="filter-count" data-cat="ops">0</span>)</button>
   </div>
 
   <div id="glossaryList"><!-- Rendered by glossary.js from GLOSSARY_DATA --></div>
@@ -520,31 +524,31 @@
         <div class="decision-tree-branches">
           <div class="card">
             <h4 class="text-teal">도구/SaaS</h4>
-            <p class="content-text">반복 사용? → <strong>구독형 (SaaS)</strong></p>
-            <p class="content-text">AI 호출 많음? → <strong>사용량 기반</strong></p>
-            <p class="content-text">무료 사용자 필요? → <strong>프리미엄</strong></p>
+            <p class="content-text">반복 사용 → <strong>구독형</strong></p>
+            <p class="content-text">AI 호출 → <strong>사용량 기반</strong></p>
+            <p class="content-text">무료 필요 → <strong>프리미엄</strong></p>
           </div>
           <div class="card">
             <h4 class="text-coral">디지털 상품</h4>
-            <p class="content-text">템플릿/플러그인 → <strong>원타임 결제</strong></p>
-            <p class="content-text">데이터 API → <strong>사용량 기반</strong></p>
-            <p class="content-text">B2B 제공 → <strong>라이선스</strong></p>
+            <p class="content-text">템플릿 → <strong>원타임 결제</strong></p>
+            <p class="content-text">데이터 API → <strong>사용량</strong></p>
+            <p class="content-text">B2B → <strong>라이선스</strong></p>
           </div>
           <div class="card">
             <h4 class="text-amber">콘텐츠/미디어</h4>
-            <p class="content-text">유튜브/블로그 → <strong>광고 기반</strong></p>
-            <p class="content-text">오픈소스 → <strong>후원/도네이션</strong></p>
+            <p class="content-text">유튜브 → <strong>광고 기반</strong></p>
+            <p class="content-text">오픈소스 → <strong>후원</strong></p>
             <p class="content-text">중개/매칭 → <strong>수수료</strong></p>
           </div>
           <div class="card">
             <h4 class="text-green">플랫폼/커뮤니티</h4>
-            <p class="content-text">교육/강의 → <strong>구독형 + 원타임</strong></p>
+            <p class="content-text">교육 → <strong>구독+원타임</strong></p>
             <p class="content-text">커뮤니티 → <strong>멤버십</strong></p>
-            <p class="content-text">마켓플레이스 → <strong>수수료</strong></p>
+            <p class="content-text">마켓 → <strong>수수료</strong></p>
           </div>
         </div>
-        <div class="card" style="margin-top:12px;text-align:center;border-color:var(--green)">
-          <p class="content-text text-green"><strong>대부분의 성공적 서비스 → 하이브리드 (위 모델을 2~3개 조합)</strong></p>
+        <div class="card" style="margin-top:12px;text-align:center;border-color:var(--green);padding:8px 20px;margin-bottom:0">
+          <p class="content-text text-green" style="margin-bottom:0;font-size:0.85rem"><strong>대부분의 성공적 서비스 → 하이브리드 (위 모델을 2~3개 조합)</strong></p>
         </div>
       </div>
     </div></div>
@@ -582,12 +586,12 @@
     <div class="accordion-body"><div class="accordion-content">
       <div class="funnel">
         <div class="funnel-step" style="background:var(--purple-bg);color:var(--purple);max-width:100%">📢 인지 (Awareness) — 제품 존재를 처음 알게 됨</div>
-        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:90%">🤔 고려 (Consideration) — 랜딩 페이지 방문, 비교</div>
-        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:78%">✅ 전환 (Conversion) — 가입, 무료 체험 시작</div>
-        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:65%">⚡ 활성화 (Activation) — "아 이거 좋다" 순간</div>
-        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:52%">🔄 유지 (Retention) — 반복 사용, 습관 형성</div>
-        <div class="funnel-step" style="background:var(--coral-bg);color:var(--coral);max-width:40%">📈 확장 (Expansion) — 무료→유료, 업셀</div>
-        <div class="funnel-step" style="background:var(--pink-bg);color:var(--pink);max-width:30%">❤️ 옹호 (Advocacy) — 자발적 추천, 바이럴</div>
+        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:92%">🤔 고려 (Consideration) — 랜딩 페이지 방문, 비교</div>
+        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:84%">✅ 전환 (Conversion) — 가입, 무료 체험 시작</div>
+        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:76%">⚡ 활성화 (Activation) — "아 이거 좋다" 순간</div>
+        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:68%">🔄 유지 (Retention) — 반복 사용, 습관 형성</div>
+        <div class="funnel-step" style="background:var(--coral-bg);color:var(--coral);max-width:60%">📈 확장 (Expansion) — 무료→유료, 업셀</div>
+        <div class="funnel-step" style="background:var(--pink-bg);color:var(--pink);max-width:52%">❤️ 옹호 (Advocacy) — 자발적 추천, 바이럴</div>
       </div>
     </div></div>
   </div>
@@ -681,10 +685,10 @@
       <h4 class="content-heading content-heading--purple">AARRR 해적 지표 (단계별 핵심 지표)</h4>
       <div class="funnel">
         <div class="funnel-step" style="background:var(--purple-bg);color:var(--purple);max-width:100%">📢 Acquisition (획득) — 사용자가 어디서 오는가? → 채널별 유입 수, CAC</div>
-        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:90%">⚡ Activation (활성화) — "아하 모먼트"에 도달했는가? → Day 1 잔존율, Time to Value</div>
-        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:78%">🔄 Retention (유지) — 계속 돌아오는가? → Day 7/30 잔존율, DAU/MAU</div>
-        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:65%">💰 Revenue (수익) — 돈을 내는가? → MRR, ARPU, 무료→유료 전환율</div>
-        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:52%">📣 Referral (추천) — 다른 사람에게 알리는가? → NPS, K-factor, 레퍼럴 전환율</div>
+        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:92%">⚡ Activation (활성화) — "아하 모먼트"에 도달했는가? → Day 1 잔존율, Time to Value</div>
+        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:84%">🔄 Retention (유지) — 계속 돌아오는가? → Day 7/30 잔존율, DAU/MAU</div>
+        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:76%">💰 Revenue (수익) — 돈을 내는가? → MRR, ARPU, 무료→유료 전환율</div>
+        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:68%">📣 Referral (추천) — 다른 사람에게 알리는가? → NPS, K-factor, 레퍼럴 전환율</div>
       </div>
 
       <h4 class="content-heading content-heading--teal">핵심 지표 세부 설명</h4>

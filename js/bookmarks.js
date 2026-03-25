@@ -17,6 +17,7 @@ function toggleBookmark(type, name) {
   }
   localStorage.setItem(BOOKMARK_KEY, JSON.stringify(bm));
   updateBookmarkIcons();
+  if (typeof updateBookmarkCount === 'function') updateBookmarkCount();
 }
 
 function isBookmarked(type, name) {
@@ -29,6 +30,5 @@ function updateBookmarkIcons() {
     var name = btn.dataset.bmName;
     var is = isBookmarked(type, name);
     btn.classList.toggle('bookmarked', is);
-    btn.textContent = is ? '\u2605' : '\u2606';
   });
 }

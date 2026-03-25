@@ -197,6 +197,7 @@
 
 /* ---- Term Cards ---- */
 .term-card {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--bd);
   border-radius: var(--radius-md);
@@ -483,12 +484,12 @@
 }
 
 /* Benchmark table specific */
-.bench-good {
+.bench-table td.bench-good {
   color: var(--green);
   font-weight: 600;
 }
 
-.bench-bad {
+.bench-table td.bench-bad {
   color: var(--red);
   font-weight: 600;
 }
@@ -698,14 +699,15 @@
 }
 
 .funnel-step {
-  padding: 12px 16px;
+  padding: 10px 14px;
   text-align: center;
   border-radius: 10px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 500;
   transition: transform 0.15s;
   cursor: default;
   width: 100%;
+  white-space: nowrap;
   border: 1px solid var(--bd);
   box-shadow: var(--shadow-card);
 }
@@ -1301,18 +1303,57 @@
 
 
 /* ==========================================================================
-   BOOKMARK BUTTONS
+   BOOKMARK BUTTONS (Ribbon style)
    ========================================================================== */
 .bookmark-btn {
+  position: absolute;
+  top: -1px;
+  right: 16px;
+  width: 24px;
+  height: 32px;
   cursor: pointer;
-  font-size: 0.9rem;
-  color: var(--tx-3);
-  transition: color 0.15s, transform 0.15s;
-  margin-left: auto;
-  flex-shrink: 0;
+  z-index: 2;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
-.bookmark-btn:hover { color: var(--amber); transform: scale(1.15); }
-.bookmark-btn.bookmarked { color: var(--amber); }
+
+.bookmark-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-3);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  border: 1px solid var(--bd);
+  transition: background 0.2s ease;
+}
+
+.bookmark-btn:hover::before {
+  background: var(--amber-bg);
+}
+
+.bookmark-btn.bookmarked::before {
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+.bookmark-btn:hover {
+  transform: translateY(2px);
+}
+
+/* ==========================================================================
+   BOOKMARK FILTER BUTTON
+   ========================================================================== */
+.filter-btn--bookmark {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.filter-btn--bookmark.active {
+  background: var(--amber-bg);
+  border-color: var(--amber);
+  color: var(--amber);
+}
 
 
 /* ==========================================================================

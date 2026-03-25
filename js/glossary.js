@@ -18,19 +18,17 @@ function renderGlossary() {
   var html = '';
   GLOSSARY_DATA.forEach(function(term) {
     var level = levelMap[term.level] || { label: '', badge: '' };
-    var tagsHtml = '<span class="tag tag-purple">' + term.tags[0] + '</span>';
+    var tagsHtml = '<span class="tag tag-' + (term.tags[0].color || 'purple') + '">' + (term.tags[0].text || term.tags[0]) + '</span>';
     if (term.tags.length > 1) {
-      tagsHtml += '<span class="tag tag-teal">' + term.tags[1] + '</span>';
+      tagsHtml += '<span class="tag tag-' + (term.tags[1].color || 'teal') + '">' + (term.tags[1].text || term.tags[1]) + '</span>';
     }
     tagsHtml += '<span class="badge ' + level.badge + '">' + level.label + '</span>';
 
     var escapedName = term.name.replace(/'/g, "\\'");
 
-    html += '<div class="term-card" data-cat="' + term.cat + '" data-level="' + term.level + '">' +
-      '<div style="display:flex;align-items:center;gap:8px;">' +
-        '<div class="term-name">' + term.name + '</div>' +
-        '<span class="bookmark-btn" data-bm-type="term" data-bm-name="' + term.name + '" onclick="event.stopPropagation(); toggleBookmark(\'term\',\'' + escapedName + '\')" title="\uBD81\uB9C8\uD06C">\u2606</span>' +
-      '</div>' +
+    html += '<div class="term-card" data-cat="' + term.category + '" data-level="' + term.level + '">' +
+      '<div class="bookmark-btn" data-bm-type="term" data-bm-name="' + term.name + '" onclick="event.stopPropagation(); toggleBookmark(\'term\',\'' + escapedName + '\')" title="즐겨찾기"></div>' +
+      '<div class="term-name">' + term.name + '</div>' +
       '<div class="term-name-en">' + term.nameEn + '</div>' +
       '<div class="term-tags">' + tagsHtml + '</div>' +
       '<div class="term-desc">' + term.desc + '</div>' +
@@ -39,6 +37,7 @@ function renderGlossary() {
   container.innerHTML = html;
 
   addCrossLinks();
+  updateFilterCounts();
 }
 
 /* ===== CROSS-LINKING BETWEEN GLOSSARY TERMS ===== */
@@ -135,12 +134,52 @@ function setGlossaryFilter(filter) {
 
 function filterGlossary() {
   var query = document.getElementById('glossarySearch').value.toLowerCase();
+  var bookmarks = (currentFilter === 'bookmarked' && typeof getBookmarks === 'function') ? getBookmarks() : [];
+  var bookmarkedNames = {};
+  bookmarks.forEach(function(b) { if (b.type === 'term') bookmarkedNames[b.name] = true; });
+
   document.querySelectorAll('.term-card').forEach(function(card) {
-    var matchCat = currentFilter === 'all' || card.dataset.cat === currentFilter;
+    var matchCat;
+    if (currentFilter === 'bookmarked') {
+      var bmBtn = card.querySelector('.bookmark-btn');
+      var termName = bmBtn ? bmBtn.dataset.bmName : '';
+      matchCat = !!bookmarkedNames[termName];
+    } else {
+      matchCat = currentFilter === 'all' || card.dataset.cat === currentFilter;
+    }
     var text = ((card.querySelector('.term-name') ? card.querySelector('.term-name').textContent : '') + ' ' +
                 (card.querySelector('.term-name-en') ? card.querySelector('.term-name-en').textContent : '') + ' ' +
                 (card.querySelector('.term-desc') ? card.querySelector('.term-desc').textContent : '')).toLowerCase();
     var matchSearch = !query || text.includes(query);
     card.classList.toggle('hidden', !(matchCat && matchSearch));
   });
+}
+
+function updateFilterCounts() {
+  if (typeof GLOSSARY_DATA === 'undefined') return;
+  var total = GLOSSARY_DATA.length;
+  var counts = {};
+  GLOSSARY_DATA.forEach(function(term) {
+    counts[term.category] = (counts[term.category] || 0) + 1;
+  });
+
+  document.querySelectorAll('.filter-count').forEach(function(span) {
+    var cat = span.dataset.cat;
+    if (cat === 'all') {
+      span.textContent = total;
+    } else {
+      span.textContent = counts[cat] || 0;
+    }
+  });
+
+  var totalEl = document.getElementById('glossaryTotal');
+  if (totalEl) totalEl.textContent = total;
+}
+
+function updateBookmarkCount() {
+  var bm = (typeof getBookmarks === 'function') ? getBookmarks() : [];
+  var count = 0;
+  bm.forEach(function(b) { if (b.type === 'term') count++; });
+  var el = document.getElementById('bookmarkCount');
+  if (el) el.textContent = count;
 }

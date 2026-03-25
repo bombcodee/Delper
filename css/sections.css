@@ -564,6 +564,19 @@
 
 .decision-tree-branches .card {
   margin-bottom: 0;
+  padding: 16px;
+  text-align: center;
+}
+
+.decision-tree-branches .card .content-text {
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.decision-tree-branches .card h4 {
+  font-size: 0.92rem;
+  margin-bottom: 10px;
 }
 
 

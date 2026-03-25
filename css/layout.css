@@ -30,17 +30,21 @@
 
 /* ---- Sidebar Header ---- */
 .sidebar-header {
-  padding: 20px 20px 18px;
+  padding: 20px 20px 16px;
   border-bottom: 1px solid var(--bd);
+}
+
+.sidebar-header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1px;
 }
 
 .sidebar-header h1 {
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   background: linear-gradient(135deg, var(--purple), var(--blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -55,6 +59,13 @@
   border-radius: var(--radius-pill);
   font-weight: 500;
   letter-spacing: 0.02em;
+}
+
+.sidebar-subtitle {
+  font-size: 0.68rem;
+  color: var(--tx-3);
+  letter-spacing: 0.03em;
+  font-weight: 400;
 }
 
 

@@ -1,0 +1,1338 @@
+/* ==========================================================================
+   COMPONENTS.CSS - Reusable UI Components
+   Cards, badges, tags, accordions, checklists, tables, overlays, etc.
+   ========================================================================== */
+
+/* ==========================================================================
+   SECTIONS (Page content sections)
+   ========================================================================== */
+.section {
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+.section-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+}
+
+.section-desc {
+  color: var(--tx-2);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+
+/* ==========================================================================
+   CARDS
+   Primary content container with hover elevation effect
+   ========================================================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color var(--tr-fast),
+    box-shadow var(--tr),
+    transform var(--tr);
+}
+
+.card:hover {
+  border-color: var(--bd-h);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+
+/* ==========================================================================
+   BADGES
+   Pill-shaped status indicators
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.badge-essential {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.badge-useful {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.badge-reference {
+  background: var(--bg-3);
+  color: var(--tx-3);
+}
+
+.badge-caution {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+
+/* ==========================================================================
+   TAGS
+   Inline categorization labels
+   ========================================================================== */
+.tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  margin-right: 4px;
+  letter-spacing: 0.01em;
+}
+
+.tag-purple {
+  background: var(--purple-bg);
+  color: var(--purple);
+}
+
+.tag-teal {
+  background: var(--teal-bg);
+  color: var(--teal);
+}
+
+.tag-blue {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+
+/* ==========================================================================
+   GLOSSARY
+   Search input, filters, and term cards
+   ========================================================================== */
+
+/* ---- Search Input ---- */
+.glossary-search {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  background: var(--bg-2);
+  color: var(--tx-1);
+  font-size: 0.9rem;
+  font-family: var(--font-main);
+  margin-bottom: 16px;
+  outline: none;
+  transition:
+    border-color var(--tr-fast),
+    box-shadow var(--tr-fast);
+}
+
+.glossary-search:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px var(--purple-glow);
+}
+
+.glossary-search::placeholder {
+  color: var(--tx-3);
+}
+
+/* ---- Filter Buttons ---- */
+.glossary-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 7px 15px;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--tx-2);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font-main);
+  font-weight: 500;
+  transition: all var(--tr-fast);
+}
+
+.filter-btn:hover {
+  border-color: var(--bd-h);
+  color: var(--tx-1);
+  background: var(--bg-hover);
+}
+
+.filter-btn.active {
+  background: var(--purple-bg);
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+/* ---- Term Cards ---- */
+.term-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color var(--tr-fast),
+    box-shadow var(--tr-fast),
+    transform var(--tr-fast);
+}
+
+.term-card:hover {
+  border-color: var(--bd-h);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.term-card.hidden {
+  display: none;
+}
+
+.term-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.term-name-en {
+  font-size: 0.78rem;
+  color: var(--tx-3);
+  margin-bottom: 6px;
+}
+
+.term-tags {
+  margin-bottom: 8px;
+}
+
+.term-desc {
+  font-size: 0.85rem;
+  color: var(--tx-2);
+  line-height: 1.75;
+}
+
+.term-category {
+  display: none;
+}
+
+
+/* ==========================================================================
+   ACCORDION
+   Collapsible sections with smooth expand/collapse
+   ========================================================================== */
+.accordion {
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--tr-fast);
+}
+
+.accordion:hover {
+  border-color: var(--bd-h);
+}
+
+.accordion-header {
+  padding: 14px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  user-select: none;
+  transition: background var(--tr-fast);
+}
+
+.accordion-header:hover {
+  background: var(--bg-hover);
+}
+
+.accordion-header h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accordion-arrow {
+  transition: transform 0.25s ease;
+  color: var(--tx-3);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.accordion.open .accordion-arrow {
+  transform: rotate(90deg);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.accordion.open .accordion-body {
+  max-height: 5000px;
+}
+
+.accordion-content {
+  padding: 16px 20px;
+  border-top: 1px solid var(--bd);
+}
+
+
+/* ==========================================================================
+   CHECKLIST
+   Interactive todo-style list with checkable items
+   ========================================================================== */
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+
+.checklist li {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: background var(--tr-fast);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checklist li.checked {
+  text-decoration: line-through;
+  color: var(--tx-3);
+}
+
+.checklist li.checked .check-box {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.checklist li.checked .check-box::after {
+  content: "\2713";
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.checklist li:hover {
+  background: var(--bg-hover);
+}
+
+.check-box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--bd);
+  border-radius: 5px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3px;
+  transition: all var(--tr-fast);
+}
+
+.check-box:hover {
+  border-color: var(--green);
+}
+
+.check-box.checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check-box.checked::after {
+  content: "\2713";
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   TIMELINE
+   Vertical timeline with left line and dot markers
+   ========================================================================== */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+  margin: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--purple), var(--bd));
+  border-radius: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 12px 0 12px 24px;
+  font-size: 0.85rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--purple);
+  background: var(--bg-1);
+  transition: background var(--tr-fast);
+}
+
+.timeline-item:hover::before {
+  background: var(--purple-bg);
+}
+
+.timeline-label {
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+
+.timeline-content {
+  color: var(--tx-2);
+  line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   TABLES (Revenue Model & Benchmark)
+   Clean bordered tables with hover rows
+   ========================================================================== */
+.model-table,
+.bench-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.model-table th,
+.bench-table th {
+  background: var(--bg-3);
+  padding: 11px 14px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--tx-2);
+  letter-spacing: 0.02em;
+}
+
+.model-table td,
+.bench-table td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--bd);
+  font-size: 0.82rem;
+  color: var(--tx-2);
+  transition: background var(--tr-fast);
+}
+
+.model-table tr:hover td,
+.bench-table tr:hover td {
+  background: var(--bg-hover);
+}
+
+/* Benchmark table specific */
+.bench-good {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.bench-bad {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.bench-tip {
+  font-size: 0.75rem;
+  color: var(--tx-2);
+  font-style: italic;
+}
+
+
+/* ==========================================================================
+   TECH STACK GRID
+   Auto-fill grid of technology cards
+   ========================================================================== */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.stack-item {
+  padding: 14px;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition:
+    border-color var(--tr-fast),
+    box-shadow var(--tr-fast),
+    transform var(--tr-fast);
+}
+
+.stack-item:hover {
+  border-color: var(--bd-h);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+
+.stack-item strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--tx-1);
+}
+
+.stack-item span {
+  color: var(--tx-3);
+  font-size: 0.75rem;
+}
+
+
+/* ==========================================================================
+   MATRIX GRID
+   2-column layout for comparison/quadrant data
+   ========================================================================== */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.matrix-cell {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bd);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--tr-fast);
+}
+
+.matrix-cell:hover {
+  border-color: var(--bd-h);
+}
+
+.matrix-cell h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.matrix-cell ul {
+  list-style: none;
+  padding: 0;
+}
+
+.matrix-cell li {
+  font-size: 0.8rem;
+  color: var(--tx-2);
+  padding: 3px 0;
+}
+
+.matrix-cell li::before {
+  content: "\2192 ";
+  color: var(--tx-3);
+}
+
+
+/* ==========================================================================
+   PROCESS STEPS
+   Clickable step items with numbered circles
+   ========================================================================== */
+.process-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--bd);
+  background: var(--bg-card);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition:
+    all var(--tr-fast);
+}
+
+.process-step:hover {
+  border-color: var(--purple);
+  background: var(--purple-bg);
+  box-shadow: var(--shadow-glow);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Step number color variants */
+.step-plan .step-num {
+  background: var(--purple-bg);
+  color: var(--purple);
+}
+
+.step-do .step-num {
+  background: var(--teal-bg);
+  color: var(--teal);
+}
+
+.step-check .step-num {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.step-act .step-num {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.step-info {
+  flex: 1;
+}
+
+.step-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.step-sub {
+  font-size: 0.75rem;
+  color: var(--tx-3);
+}
+
+.step-alias {
+  font-size: 0.78rem;
+  color: var(--purple);
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.step-arrow {
+  text-align: center;
+  color: var(--tx-3);
+  font-size: 0.8rem;
+  padding: 0;
+}
+
+.return-arrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  color: var(--red);
+  font-size: 0.78rem;
+  margin-left: 44px;
+}
+
+
+/* ==========================================================================
+   FUNNEL
+   Centered column with decreasing-width steps
+   ========================================================================== */
+.funnel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.funnel-step {
+  padding: 12px 16px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: transform 0.15s;
+  cursor: default;
+  width: 100%;
+  border: 1px solid var(--bd);
+  box-shadow: var(--shadow-card);
+}
+
+.funnel-step:hover {
+  transform: scale(1.01);
+}
+
+
+/* ==========================================================================
+   ANTI-PATTERN CARDS
+   Warning cards with colored left border accent
+   ========================================================================== */
+.anti-card {
+  border-left: 3px solid var(--red);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  background: var(--red-bg);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  transition: transform var(--tr-fast);
+}
+
+.anti-card:hover {
+  transform: translateX(2px);
+}
+
+.anti-card h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+
+.anti-card p {
+  font-size: 0.82rem;
+  color: var(--tx-2);
+  line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   COMMAND PALETTE (Ctrl+K)
+   Glassmorphism overlay with search and results
+   ========================================================================== */
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--ov);
+  z-index: 1000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20vh;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.cmd-overlay.show {
+  display: flex;
+}
+
+.cmd-box {
+  width: 560px;
+  max-width: 90vw;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: scalePop 0.2s ease;
+}
+
+.cmd-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-bottom: 1px solid var(--bd);
+  background: transparent;
+  color: var(--tx-1);
+  font-size: 1rem;
+  font-family: var(--font-main);
+  outline: none;
+}
+
+.cmd-input::placeholder {
+  color: var(--tx-3);
+}
+
+.cmd-results {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.cmd-result {
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.1s ease;
+}
+
+.cmd-result:hover,
+.cmd-result.selected {
+  background: var(--bg-hover);
+}
+
+.cmd-result .cmd-icon {
+  color: var(--tx-3);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.cmd-result .cmd-label {
+  flex: 1;
+}
+
+.cmd-result .cmd-hint {
+  font-size: 0.72rem;
+  color: var(--tx-3);
+}
+
+.cmd-empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--tx-3);
+  font-size: 0.85rem;
+}
+
+
+/* ==========================================================================
+   HELP OVERLAY
+   Modal with keyboard shortcuts info
+   ========================================================================== */
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--ov);
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.help-overlay.show {
+  display: flex;
+}
+
+.help-box {
+  width: 520px;
+  max-width: 90vw;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-modal);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: scalePop 0.2s ease;
+}
+
+.help-box h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.help-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--bd);
+}
+
+.help-row:last-child {
+  border-bottom: none;
+}
+
+.help-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.help-key kbd {
+  background: var(--bg-3);
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-sm);
+  padding: 3px 9px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.help-label {
+  color: var(--tx-2);
+  font-size: 0.85rem;
+}
+
+.help-close-hint {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--tx-3);
+  font-size: 0.78rem;
+}
+
+
+/* ==========================================================================
+   INDUSTRY TABS
+   Tab navigation for industry-specific content
+   ========================================================================== */
+.ind-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.ind-tab {
+  padding: 8px 16px;
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--tx-2);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-family: var(--font-main);
+  font-weight: 500;
+  transition: all var(--tr-fast);
+}
+
+.ind-tab:hover {
+  border-color: var(--bd-h);
+  color: var(--tx-1);
+  background: var(--bg-hover);
+}
+
+.ind-tab.active {
+  background: var(--purple-bg);
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.ind-tab.planned {
+  opacity: 0.5;
+  cursor: default;
+  position: relative;
+}
+
+.ind-tab.planned::after {
+  content: "\C608\C815";   /* Korean for "planned" */
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: var(--amber);
+  color: #fff;
+  font-size: 0.55rem;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+}
+
+.ind-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.ind-content.active {
+  display: block;
+}
+
+
+/* ==========================================================================
+   CHEAT TOGGLE (Show/hide cheat cards)
+   ========================================================================== */
+.cheat-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  width: fit-content;
+  box-shadow: var(--shadow-card);
+}
+
+.cheat-toggle label {
+  font-size: 0.82rem;
+  color: var(--tx-2);
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cheat-switch {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  background: var(--bg-3);
+  border-radius: 11px;
+  transition: background 0.25s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cheat-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cheat-switch.on {
+  background: var(--amber);
+}
+
+.cheat-switch.on::after {
+  transform: translateX(16px);
+}
+
+
+/* ==========================================================================
+   CHEAT CARDS
+   Color-coded hint/cheat cards, hidden by default
+   ========================================================================== */
+.cheat-card {
+  display: none;
+  padding: 14px 18px;
+  margin: 8px 0;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 0.82rem;
+  transition: transform var(--tr-fast);
+}
+
+.cheat-card.visible {
+  display: block;
+  animation: slideIn 0.25s ease;
+}
+
+.cheat-card:hover {
+  transform: translateX(2px);
+}
+
+.cheat-card h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.cheat-card p {
+  color: var(--tx-2);
+  line-height: 1.75;
+}
+
+/* Cheat card variants */
+.cheat-key {
+  border-left: 3px solid var(--amber);
+  background: var(--amber-bg);
+}
+
+.cheat-key h4 {
+  color: var(--amber);
+}
+
+.cheat-core {
+  border-left: 3px solid var(--purple);
+  background: var(--purple-bg);
+}
+
+.cheat-core h4 {
+  color: var(--purple);
+}
+
+.cheat-money {
+  border-left: 3px solid var(--green);
+  background: var(--green-bg);
+}
+
+.cheat-money h4 {
+  color: var(--green);
+}
+
+
+/* ==========================================================================
+   INDUSTRY PROCESS STEPS
+   Collapsible step cards for industry workflows
+   ========================================================================== */
+.ind-step {
+  background: var(--bg-card);
+  border: 1px solid var(--bd);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--tr-fast);
+}
+
+.ind-step:hover {
+  border-color: var(--bd-h);
+}
+
+.ind-step-header {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background var(--tr-fast);
+  user-select: none;
+}
+
+.ind-step-header:hover {
+  background: var(--bg-hover);
+}
+
+.ind-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ind-step-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.ind-step-arrow {
+  color: var(--tx-3);
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+
+.ind-step.open .ind-step-arrow {
+  transform: rotate(90deg);
+}
+
+.ind-step-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.ind-step.open .ind-step-body {
+  max-height: 8000px;
+}
+
+.ind-step-content {
+  padding: 14px 16px;
+  border-top: 1px solid var(--bd);
+  font-size: 0.85rem;
+  color: var(--tx-2);
+  line-height: 1.85;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE COMPONENTS (max-width: 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stack-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .glossary-filters {
+    gap: 6px;
+  }
+
+  .filter-btn {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .cmd-box {
+    margin: 0 16px;
+  }
+
+  .help-box {
+    margin: 0 16px;
+    padding: 24px;
+  }
+}
+
+
+/* ==========================================================================
+   UTILITY TEXT COLORS
+   ========================================================================== */
+.text-green { color: var(--green); }
+.text-blue { color: var(--blue); }
+.text-amber { color: var(--amber); }
+.text-red { color: var(--red); }
+.text-purple { color: var(--purple); }
+.text-teal { color: var(--teal); }
+.text-coral { color: var(--coral); }
+.text-pink { color: var(--pink); }
+.text-muted { color: var(--tx-3); }
+
+
+/* ==========================================================================
+   CONTENT TEXT HELPERS (for process/strategy sections)
+   ========================================================================== */
+.content-lead {
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.content-heading {
+  margin: 16px 0 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.content-heading--purple { color: var(--purple); }
+.content-heading--green { color: var(--green); }
+.content-heading--teal { color: var(--teal); }
+.content-heading--blue { color: var(--blue); }
+.content-heading--coral { color: var(--coral); }
+.content-heading--amber { color: var(--amber); }
+.content-heading--pink { color: var(--pink); }
+.content-heading--red { color: var(--red); }
+.content-heading--default { font-weight: 700; }
+
+.content-text {
+  font-size: 0.85rem;
+  color: var(--tx-2);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--tx-2);
+  line-height: 1.7;
+}
+
+.card--clickable {
+  cursor: pointer;
+}
+
+.card--clickable:hover {
+  border-color: var(--purple);
+}
+
+
+/* ==========================================================================
+   GLOSSARY CROSS-LINKS
+   ========================================================================== */
+.cross-link {
+  color: var(--purple);
+  cursor: pointer;
+  border-bottom: 1px dotted var(--purple);
+  transition: opacity 0.15s;
+}
+.cross-link:hover {
+  opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   BOOKMARK BUTTONS
+   ========================================================================== */
+.bookmark-btn {
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--tx-3);
+  transition: color 0.15s, transform 0.15s;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.bookmark-btn:hover { color: var(--amber); transform: scale(1.15); }
+.bookmark-btn.bookmarked { color: var(--amber); }
+
+
+/* ==========================================================================
+   STACK ITEM LINKS (clickable resource cards)
+   ========================================================================== */
+.stack-item--link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.stack-item--link:hover {
+  border-color: var(--purple);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card-hover);
+  text-decoration: none;
+}
+.stack-item--link strong {
+  color: var(--tx-1);
+}
+.stack-item--link:hover strong {
+  color: var(--purple);
+}

@@ -1,0 +1,391 @@
+/* ==========================================================================
+   VARIABLES.CSS - Theme Custom Properties
+   Five themes: dark, midnight, spring, blossom, sky
+   ========================================================================== */
+
+/* ===== SHARED / ROOT VARIABLES ===== */
+:root {
+  /* Font families */
+  --font-main: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Layout */
+  --sidebar-w: 272px;
+
+  /* Transition speed */
+  --tr: 0.3s ease;
+  --tr-fast: 0.15s ease;
+  --tr-slow: 0.4s ease;
+
+  /* Border radius tokens */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 99px;
+}
+
+
+/* ==========================================================================
+   DARK THEME (Default) - Soft Charcoal
+   Warm dark with a subtle purple undertone. Vibrant accents pop against
+   the deep navy-charcoal base.
+   ========================================================================== */
+[data-theme="dark"] {
+  /* ---- Background scale ---- */
+  --bg-1: #13141d;
+  --bg-2: #1a1b27;
+  --bg-3: #232435;
+  --bg-hover: #2b2d42;
+  --bg-card: #1c1d2a;
+
+  /* ---- Text scale ---- */
+  --tx-1: #e6e6f0;
+  --tx-2: #9294a8;
+  --tx-3: #5f6175;
+
+  /* ---- Borders ---- */
+  --bd: #2a2c3e;
+  --bd-h: #3a3c52;
+
+  /* ---- Primary accent (purple/violet) ---- */
+  --purple: #8b5cf6;
+  --purple-bg: rgba(139, 92, 246, 0.12);
+  --purple-glow: rgba(139, 92, 246, 0.30);
+
+  /* ---- Semantic colors ---- */
+  --green: #36d399;
+  --green-bg: rgba(54, 211, 153, 0.12);
+
+  --blue: #5eaaff;
+  --blue-bg: rgba(94, 170, 255, 0.12);
+
+  --amber: #f9be22;
+  --amber-bg: rgba(249, 190, 34, 0.12);
+
+  --red: #f47272;
+  --red-bg: rgba(244, 114, 114, 0.12);
+
+  --teal: #2cd4bf;
+  --teal-bg: rgba(44, 212, 191, 0.12);
+
+  --coral: #fb8f3c;
+  --coral-bg: rgba(251, 143, 60, 0.12);
+
+  --pink: #f472b6;
+  --pink-bg: rgba(244, 114, 182, 0.12);
+
+  /* ---- Overlay ---- */
+  --ov: rgba(6, 7, 16, 0.74);
+
+  /* ---- Scrollbar ---- */
+  --sb-thumb: #3a3c52;
+  --sb-track: #1a1b27;
+
+  /* ---- Shadows ---- */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.30), 0 1px 2px rgba(0, 0, 0, 0.20);
+  --shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.35), 0 3px 10px rgba(0, 0, 0, 0.20);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.38);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.18);
+
+  /* ---- Glass effect ---- */
+  --glass-bg: rgba(26, 27, 39, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.06);
+
+  /* ---- Selection ---- */
+  --selection-bg: rgba(139, 92, 246, 0.3);
+  --selection-text: #e6e6f0;
+}
+
+
+/* ==========================================================================
+   MIDNIGHT THEME - Deep Dark
+   Deeper, more immersive. Like a starlit night with subtle blue-black
+   tones and luminous accent colors.
+   ========================================================================== */
+[data-theme="midnight"] {
+  /* ---- Background scale ---- */
+  --bg-1: #0b0c14;
+  --bg-2: #111320;
+  --bg-3: #191b2a;
+  --bg-hover: #21243a;
+  --bg-card: #131522;
+
+  /* ---- Text scale ---- */
+  --tx-1: #e2e2ec;
+  --tx-2: #868899;
+  --tx-3: #535566;
+
+  /* ---- Borders ---- */
+  --bd: #242638;
+  --bd-h: #333548;
+
+  /* ---- Primary accent (lighter purple for deep contrast) ---- */
+  --purple: #a78bfa;
+  --purple-bg: rgba(167, 139, 250, 0.12);
+  --purple-glow: rgba(167, 139, 250, 0.25);
+
+  /* ---- Semantic colors (slightly more saturated) ---- */
+  --green: #4ade80;
+  --green-bg: rgba(74, 222, 128, 0.12);
+
+  --blue: #7dd3fc;
+  --blue-bg: rgba(125, 211, 252, 0.12);
+
+  --amber: #fcd34d;
+  --amber-bg: rgba(252, 211, 77, 0.12);
+
+  --red: #fca5a5;
+  --red-bg: rgba(252, 165, 165, 0.12);
+
+  --teal: #5eead4;
+  --teal-bg: rgba(94, 234, 212, 0.12);
+
+  --coral: #fdba74;
+  --coral-bg: rgba(253, 186, 116, 0.12);
+
+  --pink: #f9a8d4;
+  --pink-bg: rgba(249, 168, 212, 0.12);
+
+  /* ---- Overlay ---- */
+  --ov: rgba(3, 4, 10, 0.80);
+
+  /* ---- Scrollbar ---- */
+  --sb-thumb: #333548;
+  --sb-track: #111320;
+
+  /* ---- Shadows ---- */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.38), 0 1px 2px rgba(0, 0, 0, 0.26);
+  --shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.44), 0 3px 10px rgba(0, 0, 0, 0.26);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.48);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 20px rgba(167, 139, 250, 0.18);
+
+  /* ---- Glass effect ---- */
+  --glass-bg: rgba(17, 19, 32, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.04);
+
+  /* ---- Selection ---- */
+  --selection-bg: rgba(167, 139, 250, 0.3);
+  --selection-text: #e2e2ec;
+}
+
+
+/* ==========================================================================
+   SPRING THEME - Warm Cream
+   Like morning sunlight on old paper. Cozy, warm parchment tones with
+   earthy, golden accents.
+   ========================================================================== */
+[data-theme="spring"] {
+  /* ---- Background scale ---- */
+  --bg-1: #f7f2e8;
+  --bg-2: #eee8da;
+  --bg-3: #e3dccb;
+  --bg-hover: #d8cfbc;
+  --bg-card: #fdfaf3;
+
+  /* ---- Text scale ---- */
+  --tx-1: #33291e;
+  --tx-2: #6d6050;
+  --tx-3: #a09382;
+
+  /* ---- Borders ---- */
+  --bd: #d8cfbc;
+  --bd-h: #c7bca8;
+
+  /* ---- Primary accent (warm purple) ---- */
+  --purple: #7d5fb5;
+  --purple-bg: rgba(125, 95, 181, 0.09);
+  --purple-glow: rgba(125, 95, 181, 0.18);
+
+  /* ---- Semantic colors (warm-shifted, earthy) ---- */
+  --green: #4a9e6e;
+  --green-bg: rgba(74, 158, 110, 0.08);
+
+  --blue: #5a8ec4;
+  --blue-bg: rgba(90, 142, 196, 0.08);
+
+  --amber: #c78c20;
+  --amber-bg: rgba(199, 140, 32, 0.09);
+
+  --red: #cc4f4f;
+  --red-bg: rgba(204, 79, 79, 0.08);
+
+  --teal: #2a9a8a;
+  --teal-bg: rgba(42, 154, 138, 0.08);
+
+  --coral: #c46d2e;
+  --coral-bg: rgba(196, 109, 46, 0.08);
+
+  --pink: #b85090;
+  --pink-bg: rgba(184, 80, 144, 0.08);
+
+  /* ---- Overlay ---- */
+  --ov: rgba(51, 41, 30, 0.42);
+
+  /* ---- Scrollbar ---- */
+  --sb-thumb: #c7bca8;
+  --sb-track: #eee8da;
+
+  /* ---- Shadows (warm-tinted) ---- */
+  --shadow-card: 0 1px 3px rgba(51, 41, 30, 0.07), 0 1px 2px rgba(51, 41, 30, 0.04);
+  --shadow-card-hover: 0 8px 25px rgba(51, 41, 30, 0.11), 0 3px 10px rgba(51, 41, 30, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(51, 41, 30, 0.09);
+  --shadow-modal: 0 24px 80px rgba(51, 41, 30, 0.20);
+  --shadow-glow: 0 0 20px rgba(125, 95, 181, 0.12);
+
+  /* ---- Glass effect ---- */
+  --glass-bg: rgba(253, 250, 243, 0.88);
+  --glass-border: rgba(51, 41, 30, 0.08);
+
+  /* ---- Selection ---- */
+  --selection-bg: rgba(125, 95, 181, 0.2);
+  --selection-text: #33291e;
+}
+
+
+/* ==========================================================================
+   BLOSSOM THEME - Cherry Blossom
+   Soft romantic pink-lavender palette. Like cherry blossoms in spring
+   with orchid and rose accents.
+   ========================================================================== */
+[data-theme="blossom"] {
+  /* ---- Background scale ---- */
+  --bg-1: #f9f3f7;
+  --bg-2: #f1e9ef;
+  --bg-3: #e6dce3;
+  --bg-hover: #dbd0d8;
+  --bg-card: #fdfafc;
+
+  /* ---- Text scale ---- */
+  --tx-1: #302030;
+  --tx-2: #6b5870;
+  --tx-3: #9e8da3;
+
+  /* ---- Borders ---- */
+  --bd: #dbd0d8;
+  --bd-h: #cbbfc8;
+
+  /* ---- Primary accent (orchid) ---- */
+  --purple: #9b6bb5;
+  --purple-bg: rgba(155, 107, 181, 0.09);
+  --purple-glow: rgba(155, 107, 181, 0.18);
+
+  /* ---- Semantic colors (romantic/floral tones) ---- */
+  --green: #4aab82;
+  --green-bg: rgba(74, 171, 130, 0.08);
+
+  --blue: #6290cc;
+  --blue-bg: rgba(98, 144, 204, 0.08);
+
+  --amber: #c49025;
+  --amber-bg: rgba(196, 144, 37, 0.08);
+
+  --red: #d45a6a;
+  --red-bg: rgba(212, 90, 106, 0.08);
+
+  --teal: #30a8a0;
+  --teal-bg: rgba(48, 168, 160, 0.08);
+
+  --coral: #d07a42;
+  --coral-bg: rgba(208, 122, 66, 0.08);
+
+  --pink: #d4729a;
+  --pink-bg: rgba(212, 114, 154, 0.09);
+
+  /* ---- Overlay ---- */
+  --ov: rgba(48, 32, 48, 0.42);
+
+  /* ---- Scrollbar ---- */
+  --sb-thumb: #cbbfc8;
+  --sb-track: #f1e9ef;
+
+  /* ---- Shadows (plum-tinted) ---- */
+  --shadow-card: 0 1px 3px rgba(48, 32, 48, 0.06), 0 1px 2px rgba(48, 32, 48, 0.04);
+  --shadow-card-hover: 0 8px 25px rgba(48, 32, 48, 0.10), 0 3px 10px rgba(48, 32, 48, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(48, 32, 48, 0.08);
+  --shadow-modal: 0 24px 80px rgba(48, 32, 48, 0.20);
+  --shadow-glow: 0 0 20px rgba(155, 107, 181, 0.14);
+
+  /* ---- Glass effect ---- */
+  --glass-bg: rgba(253, 250, 252, 0.88);
+  --glass-border: rgba(48, 32, 48, 0.07);
+
+  /* ---- Selection ---- */
+  --selection-bg: rgba(155, 107, 181, 0.22);
+  --selection-text: #302030;
+}
+
+
+/* ==========================================================================
+   SKY THEME - Clear Sky
+   Fresh and airy. Like looking up at a clear spring sky with crisp
+   blues and ocean teal accents.
+   ========================================================================== */
+[data-theme="sky"] {
+  /* ---- Background scale ---- */
+  --bg-1: #f2f7fc;
+  --bg-2: #e7eff8;
+  --bg-3: #d9e5f1;
+  --bg-hover: #cddaea;
+  --bg-card: #f9fbfe;
+
+  /* ---- Text scale ---- */
+  --tx-1: #1a2940;
+  --tx-2: #4d6280;
+  --tx-3: #8198b0;
+
+  /* ---- Borders ---- */
+  --bd: #cddaea;
+  --bd-h: #b5c8dc;
+
+  /* ---- Primary accent (slate blue) ---- */
+  --purple: #5872b8;
+  --purple-bg: rgba(88, 114, 184, 0.09);
+  --purple-glow: rgba(88, 114, 184, 0.18);
+
+  /* ---- Semantic colors (crisp, airy) ---- */
+  --green: #3a9e78;
+  --green-bg: rgba(58, 158, 120, 0.08);
+
+  --blue: #4a8fd4;
+  --blue-bg: rgba(74, 143, 212, 0.09);
+
+  --amber: #c48c1a;
+  --amber-bg: rgba(196, 140, 26, 0.08);
+
+  --red: #d25252;
+  --red-bg: rgba(210, 82, 82, 0.08);
+
+  --teal: #35a5b5;
+  --teal-bg: rgba(53, 165, 181, 0.09);
+
+  --coral: #cc6e35;
+  --coral-bg: rgba(204, 110, 53, 0.08);
+
+  --pink: #c25a94;
+  --pink-bg: rgba(194, 90, 148, 0.08);
+
+  /* ---- Overlay ---- */
+  --ov: rgba(26, 41, 64, 0.38);
+
+  /* ---- Scrollbar ---- */
+  --sb-thumb: #b5c8dc;
+  --sb-track: #e7eff8;
+
+  /* ---- Shadows (cool blue-tinted) ---- */
+  --shadow-card: 0 1px 3px rgba(26, 41, 64, 0.06), 0 1px 2px rgba(26, 41, 64, 0.04);
+  --shadow-card-hover: 0 8px 25px rgba(26, 41, 64, 0.10), 0 3px 10px rgba(26, 41, 64, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(26, 41, 64, 0.08);
+  --shadow-modal: 0 24px 80px rgba(26, 41, 64, 0.20);
+  --shadow-glow: 0 0 20px rgba(88, 114, 184, 0.14);
+
+  /* ---- Glass effect ---- */
+  --glass-bg: rgba(249, 251, 254, 0.88);
+  --glass-border: rgba(26, 41, 64, 0.07);
+
+  /* ---- Selection ---- */
+  --selection-bg: rgba(88, 114, 184, 0.2);
+  --selection-text: #1a2940;
+}

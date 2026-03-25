@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1인 개발자 종합 가이드</title>
+  <meta name="description" content="1인 개발자를 위한 프로세스, 전략, 기술, 운영 종합 가이드">
+  <meta property="og:title" content="1인 개발자 종합 가이드">
+  <meta property="og:description" content="개발 프로세스부터 수익화까지, 1인 개발자의 모든 것">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+</head>
+<body>
+
+<!-- ===== HAMBURGER (Mobile) ===== -->
+<button class="hamburger" onclick="toggleSidebar()" aria-label="메뉴 열기">☰</button>
+<div class="mob-overlay" id="mobOverlay" onclick="toggleSidebar()"></div>
+
+<div class="layout">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>DEV GUIDE</h1>
+    <span>v2.0</span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">Overview</div>
+      <div class="nav-item active" data-section="dashboard" onclick="showSection('dashboard')">
+        <span class="icon">📊</span> 대시보드
+      </div>
+      <div class="nav-item" data-section="glossary" onclick="showSection('glossary')">
+        <span class="icon">📖</span> 용어집
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Process</div>
+      <div class="nav-item" data-section="process" onclick="showSection('process')">
+        <span class="icon">🔄</span> 프로세스 가이드
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Strategy</div>
+      <div class="nav-item" data-section="strategy" onclick="showSection('strategy')">
+        <span class="icon">🎯</span> 전략 가이드
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Technical</div>
+      <div class="nav-item" data-section="techref" onclick="showSection('techref')">
+        <span class="icon">⚙️</span> 기술 레퍼런스
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Operations</div>
+      <div class="nav-item" data-section="ops" onclick="showSection('ops')">
+        <span class="icon">🛠</span> 운영/생존 가이드
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Industry</div>
+      <div class="nav-item" data-section="industry" onclick="showSection('industry')">
+        <span class="icon">🏭</span> 산업분야 가이드
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Mindset</div>
+      <div class="nav-item" data-section="mindset" onclick="showSection('mindset')">
+        <span class="icon">🧠</span> 마인드셋/레퍼런스
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Reference</div>
+      <div class="nav-item" data-section="reference" onclick="showSection('reference')">
+        <span class="icon">📚</span> 추천 리소스
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="theme-switcher">
+      <button class="theme-btn active" onclick="setTheme('dark')">Dark</button>
+      <button class="theme-btn" onclick="setTheme('midnight')">Midnight</button>
+      <button class="theme-btn" onclick="setTheme('spring')">Spring</button>
+      <button class="theme-btn" onclick="setTheme('blossom')">Blossom</button>
+      <button class="theme-btn" onclick="setTheme('sky')">Sky</button>
+    </div>
+    <div class="help-hint">F1 도움말 · Ctrl+K 검색</div>
+  </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+<div class="content">
+
+<!-- ================================================================
+     SECTION 1: DASHBOARD
+     ================================================================ -->
+<div class="section active" id="sec-dashboard">
+  <h2 class="section-title">대시보드</h2>
+  <p class="section-desc">1인 개발자의 전체 개발 프로세스를 한눈에 볼 수 있는 로드맵입니다. 각 단계를 클릭하면 상세 가이드로 이동합니다.</p>
+
+  <!-- PDCA Process Diagram -->
+  <div class="pdca-container">
+    <!-- PLAN -->
+    <div class="pdca-group">
+      <div class="pdca-group-label">
+        <div class="pdca-badge pdca-badge--plan">PLAN</div>
+      </div>
+      <div class="pdca-group-steps pdca-group-steps--plan">
+        <div class="process-step step-plan" onclick="showSection('process','proc-ideation')">
+          <div class="step-num">1</div>
+          <div class="step-info"><div class="step-title">Ideation</div><div class="step-sub">아이디어 발상</div></div>
+        </div>
+        <div class="step-arrow">↓</div>
+        <div class="process-step step-plan" onclick="showSection('process','proc-discovery')">
+          <div class="step-num">2</div>
+          <div class="step-info"><div class="step-title">Discovery <span class="step-alias">(= Research)</span></div><div class="step-sub">시장·경쟁·사용자 조사</div></div>
+        </div>
+        <div class="step-arrow">↓</div>
+        <div class="process-step step-plan" onclick="showSection('process','proc-planning')">
+          <div class="step-num">3</div>
+          <div class="step-info"><div class="step-title">Planning</div><div class="step-sub">PRD · User Flow · Wireframe · Tech Spec</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="step-arrow pdca-arrow">↓</div>
+
+    <!-- DO -->
+    <div class="pdca-group">
+      <div class="pdca-group-label">
+        <div class="pdca-badge pdca-badge--do">DO</div>
+      </div>
+      <div class="pdca-group-steps pdca-group-steps--do">
+        <div class="process-step step-do" onclick="showSection('process','proc-dev')">
+          <div class="step-num">4</div>
+          <div class="step-info"><div class="step-title">Development <span class="step-alias">(= Implementation)</span></div><div class="step-sub">코딩 · Sprint 단위</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="step-arrow pdca-arrow">↓</div>
+
+    <!-- CHECK -->
+    <div class="pdca-group">
+      <div class="pdca-group-label">
+        <div class="pdca-badge pdca-badge--check">CHECK</div>
+      </div>
+      <div class="pdca-group-steps pdca-group-steps--check">
+        <div class="process-step step-check" onclick="showSection('process','proc-qa')">
+          <div class="step-num">5</div>
+          <div class="step-info"><div class="step-title">QA <span class="step-alias">(= Testing)</span></div><div class="step-sub">테스트 · 검증</div></div>
+        </div>
+        <div class="step-arrow">↓</div>
+        <div class="process-step step-check" onclick="showSection('process','proc-launch')">
+          <div class="step-num">6</div>
+          <div class="step-info"><div class="step-title">Launch <span class="step-alias">(= Deployment)</span></div><div class="step-sub">배포 · 출시</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="step-arrow pdca-arrow">↓</div>
+
+    <!-- ACT -->
+    <div class="pdca-group">
+      <div class="pdca-group-label">
+        <div class="pdca-badge pdca-badge--act">ACT</div>
+      </div>
+      <div class="pdca-group-steps pdca-group-steps--act">
+        <div class="process-step step-act" onclick="showSection('process','proc-iteration')">
+          <div class="step-num">7</div>
+          <div class="step-info"><div class="step-title">Iteration <span class="step-alias">(= Improvement)</span></div><div class="step-sub">피드백 기반 개선</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="return-arrow">↩ 4단계 Development로 회귀 반복</div>
+  </div>
+
+  <!-- Quick Access Cards -->
+  <div class="stat-grid">
+    <div class="card card--clickable" onclick="showSection('glossary')">
+      <div class="card-title">📖 용어집</div>
+      <p class="card-desc">119개 개발 용어 정리</p>
+    </div>
+    <div class="card card--clickable" onclick="showSection('strategy')">
+      <div class="card-title">🎯 전략 가이드</div>
+      <p class="card-desc">수익화 · 마케팅 · 가격 설계</p>
+    </div>
+    <div class="card card--clickable" onclick="showSection('techref')">
+      <div class="card-title">⚙️ 기술 레퍼런스</div>
+      <p class="card-desc">기술 스택 · 분야별 개발</p>
+    </div>
+    <div class="card card--clickable" onclick="showSection('ops')">
+      <div class="card-title">🛠 운영 가이드</div>
+      <p class="card-desc">자동화 · 리스크 · 법적 필수</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 2: GLOSSARY (rendered by JS from data)
+     ================================================================ -->
+<div class="section" id="sec-glossary">
+  <h2 class="section-title">용어집</h2>
+  <p class="section-desc">개발 프로세스 전반에서 사용되는 핵심 용어들을 카테고리별로 정리했습니다.</p>
+
+  <input type="text" class="glossary-search" id="glossarySearch" placeholder="용어 검색... (예: PRD, MVP, CI/CD)" oninput="filterGlossary()">
+
+  <div class="glossary-filters" id="glossaryFilters">
+    <button class="filter-btn active" data-filter="all" onclick="setGlossaryFilter('all')">전체</button>
+    <button class="filter-btn" data-filter="doc" onclick="setGlossaryFilter('doc')">기획 문서</button>
+    <button class="filter-btn" data-filter="method" onclick="setGlossaryFilter('method')">방법론</button>
+    <button class="filter-btn" data-filter="phase" onclick="setGlossaryFilter('phase')">프로세스 단계</button>
+    <button class="filter-btn" data-filter="discovery" onclick="setGlossaryFilter('discovery')">Discovery</button>
+    <button class="filter-btn" data-filter="devpractice" onclick="setGlossaryFilter('devpractice')">Development 실무</button>
+    <button class="filter-btn" data-filter="design-decision" onclick="setGlossaryFilter('design-decision')">설계 결정</button>
+    <button class="filter-btn" data-filter="qa" onclick="setGlossaryFilter('qa')">QA/테스트</button>
+    <button class="filter-btn" data-filter="launch" onclick="setGlossaryFilter('launch')">Launch/배포</button>
+    <button class="filter-btn" data-filter="ops" onclick="setGlossaryFilter('ops')">운영/개선</button>
+  </div>
+
+  <div id="glossaryList"><!-- Rendered by glossary.js from GLOSSARY_DATA --></div>
+</div>
+
+<!-- ================================================================
+     SECTION 3: PROCESS GUIDE
+     ================================================================ -->
+<div class="section" id="sec-process">
+  <h2 class="section-title">프로세스 상세 가이드</h2>
+  <p class="section-desc">각 개발 단계에서 무엇을 하고, 어떻게 하고, 무엇을 주의해야 하는지를 실전 수준으로 정리했습니다.</p>
+
+  <!-- 1. IDEATION -->
+  <div class="accordion" id="proc-ideation">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>💡 1. Ideation — 아이디어 발상</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> "풀 가치가 있는 문제"를 찾고, 한 문장으로 정의하는 것.</p>
+
+      <h4 class="content-heading content-heading--purple">실전 방법</h4>
+      <p class="content-text"><strong>1. Problem Statement 작성법:</strong> "[타겟 사용자]는 [상황]에서 [문제]를 겪고 있다." 형식으로 작성. 예: "ADHD 성향의 사람들은 비구조화된 생각을 정리하는 데 과도한 인지 부하를 겪고 있다."</p>
+      <p class="content-text"><strong>2. Value Proposition 작성법:</strong> "[제품]은 [타겟]이 [문제]를 해결할 수 있게 [핵심 가치]를 제공한다." 형식. Problem Statement의 답이 되어야 함.</p>
+      <p class="content-text"><strong>3. Feasibility Study:</strong> 세 가지를 확인 — ① 기술적으로 만들 수 있는가? (AI API 존재 여부, 핵심 기능 구현 가능성) ② 비용이 감당 가능한가? (AI API 월 예상 비용, 서버 비용) ③ 시장이 존재하는가? (검색량, 커뮤니티 반응)</p>
+
+      <h4 class="content-heading content-heading--default">산출물 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Problem Statement 한 문장 작성 완료</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Value Proposition 한 문장 작성 완료</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>기술적 가능성 확인 (핵심 API/기술 존재 여부)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>월 예상 비용 대략 계산 (서버 + API + 도메인)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>비슷한 제품 3개 이상 검색 완료</li>
+      </ul>
+
+      <h4 class="content-heading content-heading--green">통과 기준</h4>
+      <p class="content-text">Problem Statement와 Value Proposition이 명확하고, 기술적으로 구현 가능하며, 비용이 런웨이 내에서 감당 가능하면 다음 단계로.</p>
+
+      <div class="anti-card">
+        <h4>⚠️ 실패 패턴</h4>
+        <p>"이거 대박이야!" 확신만으로 검증 없이 바로 코딩 시작. 아이디어에 반했을 때가 가장 위험. 최소 1~2일은 냉각기를 두고 객관적으로 재검토.</p>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 2. DISCOVERY -->
+  <div class="accordion" id="proc-discovery">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🔍 2. Discovery — 시장·경쟁·사용자 조사</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> "이 제품을 만들 가치가 있는가?"를 데이터로 확인하는 것. 실제 0순위 단계.</p>
+
+      <h4 class="content-heading content-heading--purple">실전 방법 (이 순서대로)</h4>
+      <p class="content-text"><strong>1단계: Competitive Analysis (경쟁 분석)</strong><br>→ 비슷한 제품 5~10개 찾기. 각각의 핵심 기능, 가격, 타겟, 장단점을 표로 정리.<br>→ 핵심 질문: "이미 있는데 왜 또 만드는가?" — 답이 명확하지 않으면 차별점이 없는 것.<br>→ 도구: Google, Product Hunt, 디스콰이엇, 앱스토어 검색</p>
+      <p class="content-text"><strong>2단계: User Persona 정의</strong><br>→ 1~2개만. 너무 많으면 초점이 흐려짐.<br>→ 형식: 이름, 나이, 직업, 핵심 고민, 현재 해결 방법, 불만족 포인트.<br>→ 예: "민수, 28세, 프리랜서 개발자, ADHD 진단, 노션 쓰다 포기, 생각이 정리 안 돼서 프로젝트 시작을 못 함"</p>
+      <p class="content-text"><strong>3단계: TAM/SAM/SOM 시장 규모</strong><br>→ TAM(전체 시장): 전 세계 노트/생산성 앱 시장<br>→ SAM(접근 가능): 한국어 사용자 중 AI 노트앱에 관심 있는 사람<br>→ SOM(실제 확보 가능): 첫 6개월 내 현실적으로 확보할 수 있는 유료 사용자 수<br>→ 정확한 숫자보다 "이 시장이 충분히 큰가?"의 감을 잡는 게 목적</p>
+      <p class="content-text"><strong>4단계: User Interview / Survey</strong><br>→ 최소 5명. 타겟 사용자에게 직접 물어봐야 함.<br>→ The Mom Test 원칙: "이런 앱 만들면 쓸 거예요?"는 나쁜 질문 (다들 "네"라고 답함). "지금 이 문제를 어떻게 해결하고 있어요?" "마지막으로 이 문제 때문에 고생한 게 언제예요?"가 좋은 질문.<br>→ 채널: Reddit, 커뮤니티, 카카오톡 오픈채팅, 지인</p>
+
+      <h4 class="content-heading content-heading--default">산출물 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>경쟁 제품 비교표 작성 (5개 이상)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>차별화 포인트 한 문장 정리</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>User Persona 1~2개 작성</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>TAM/SAM/SOM 대략적 감 잡기</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>User Interview 최소 5명 완료</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>인터뷰에서 발견한 핵심 인사이트 3개 이상 정리</li>
+      </ul>
+
+      <h4 class="content-heading content-heading--green">통과 기준</h4>
+      <p class="content-text">인터뷰 대상 5명 중 3명 이상이 "이 문제를 실제로 겪고 있다"고 답하고, 현재 대안에 불만족하며, 차별화 포인트가 명확하면 다음 단계로.</p>
+
+      <div class="anti-card">
+        <h4>⚠️ 실패 패턴</h4>
+        <p>Discovery를 건너뛰고 바로 Planning으로 가는 것. "조사할 시간에 만드는 게 빠르다"는 착각. 이 단계를 1주만 해도 6개월간 잘못된 방향으로 만드는 것을 막을 수 있음.</p>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 3. PLANNING -->
+  <div class="accordion" id="proc-planning">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>📋 3. Planning — 기획</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> "뭘 어떻게 만들 건가"를 문서로 확정하는 것. 바이브코딩에서 AI에게 줄 컨텍스트의 품질이 여기서 결정됨.</p>
+
+      <h4 class="content-heading content-heading--purple">PRD 작성법 (1인 개발 최적화)</h4>
+      <p class="content-text">PRD 하나에 BRD + AC를 통합. 구조:</p>
+      <div class="card">
+        <p class="content-text"><strong>1. 왜 만드는가 (BRD 영역)</strong> — Problem Statement, Value Proposition, 타겟 사용자, 성공 지표<br>
+        <strong>2. 뭘 만드는가</strong> — 기능 목록을 MoSCoW로 분류<br>
+        &nbsp;&nbsp;→ <span class="text-green">Must</span>: 이게 없으면 제품이 아님 (MVP 핵심)<br>
+        &nbsp;&nbsp;→ <span class="text-blue">Should</span>: 있으면 훨씬 좋지만 v1에 없어도 됨<br>
+        &nbsp;&nbsp;→ <span class="text-amber">Could</span>: 여유 있으면 넣을 것<br>
+        &nbsp;&nbsp;→ <span class="text-red">Won't</span>: 이번에는 명시적으로 안 함<br>
+        <strong>3. 각 기능별 AC</strong> — "정리 버튼 클릭 → 10초 내 결과 표시" 같은 완료 기준<br>
+        <strong>4. Edge Case</strong> — "빈 텍스트 입력 시?", "10만 글자 입력 시?", "네트워크 끊김 시?"</p>
+      </div>
+
+      <h4 class="content-heading content-heading--teal">User Flow 작성법</h4>
+      <p class="content-text">핵심 시나리오 3~5개만. 모든 경로를 그리려 하면 끝이 없음.<br>→ 시나리오 1: 신규 가입 → 온보딩 → 첫 노트 작성 → 정리 요청 → 결과 확인<br>→ 시나리오 2: 기존 사용자 → 로그인 → 이전 노트 열기 → 추가 작성 → 정리<br>→ 시나리오 3: 무료→유료 전환 흐름<br>도구: Excalidraw(무료), FigJam, 종이+펜도 충분.</p>
+
+      <h4 class="content-heading content-heading--blue">Wireframe 실전 팁</h4>
+      <p class="content-text">User Flow의 각 화면을 스케치. 예쁠 필요 없고 요소 배치만.<br>→ 한 화면에 핵심 행동(CTA)이 하나만 있는지 확인<br>→ 모바일 화면도 같이 그려야 반응형 설계를 미리 고려할 수 있음</p>
+
+      <h4 class="content-heading content-heading--coral">Tech Spec 작성법</h4>
+      <p class="content-text">→ 기술 스택 확정 (프론트, 백엔드, DB, 배포, 인증, 결제)<br>→ DB 스키마 초안 (ERD) — 최소한 핵심 테이블과 관계<br>→ API 엔드포인트 목록 — 각 기능에 필요한 API 정리<br>→ 외부 서비스 연동 목록 (AI API, 인증, 결제, 파일 저장소)<br>→ 인증 방식 결정 (이메일/소셜 로그인, JWT/세션)</p>
+
+      <h4 class="content-heading content-heading--amber">Estimation (공수 산정) 실전법</h4>
+      <p class="content-text">→ Must 기능 각각에 예상 시간 할당<br>→ 자기가 예상한 시간에 ×2를 곱하기 (경험적으로 항상 2배 걸림)<br>→ 전체 합이 4주 이내면 적정 MVP. 6주 넘으면 Must를 더 줄여야 함<br>→ 2주 스프린트 단위로 쪼개서 "1차 스프린트에서 뭘 할지"까지 결정</p>
+
+      <h4 class="content-heading content-heading--default">산출물 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>PRD 작성 완료 (BRD + 기능 MoSCoW + AC + Edge Case)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>User Flow 핵심 시나리오 3~5개</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Wireframe 주요 화면</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Tech Spec (스택 + DB 스키마 + API 목록)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>외부 서비스 연동 목록</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>MVP Definition (Must만 추출)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Estimation 완료 (×2 적용, 4주 이내 확인)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>1차 스프린트 범위 확정</li>
+      </ul>
+
+      <div class="anti-card">
+        <h4>⚠️ 실패 패턴: Feature Creep</h4>
+        <p>MVP에 "이것도 있으면 좋겠다"를 계속 추가하다 영원히 출시 못 함. Won't 목록에 넣은 건 진짜로 안 만들어야 함. Must에 있는 기능도 의심하기 — "이거 없으면 진짜 제품이 안 되나?"</p>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 4. DEVELOPMENT -->
+  <div class="accordion" id="proc-dev">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>💻 4. Development — 코딩</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> Planning의 산출물에 따라 동작하는 코드를 만드는 것. Sprint 단위로 쪼개서 2주마다 동작하는 결과물을 만들기.</p>
+
+      <h4 class="content-heading content-heading--purple">개발 시작 전 환경 세팅</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>GitHub 레포 생성 + .gitignore 설정</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>브랜치 전략 결정 — 1인 개발: main + feature 브랜치면 충분</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>커밋 컨벤션 설정 — feat: / fix: / refactor: / docs: 형식</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Linting/Formatting 설정 (ESLint + Prettier)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>TypeScript 설정 (규모가 커질 제품이면)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>환경변수(.env) 설정 — .env.local / .env.production 분리</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>CI/CD 설정 — push하면 자동 배포 (Vercel이면 자동)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>CLAUDE.md 작성 — 프로젝트 구조, 기술 스택, 코딩 규칙 정리</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>AI Mock 데이터 준비 — 개발 중 실제 API 호출 비용 절감</li>
+      </ul>
+
+      <h4 class="content-heading content-heading--teal">Sprint 운영법 (1인 개발 버전)</h4>
+      <p class="content-text">→ 1 Sprint = 2주. 매 스프린트 시작 시 "이번 2주에 뭘 만들지" 3~5개 태스크 선정.<br>→ 각 태스크는 하루 안에 끝낼 수 있는 크기로 쪼개기. "로그인 기능"이 아니라 "소셜 로그인 버튼 UI", "Google OAuth 연동", "로그인 후 리다이렉트" 같은 단위.<br>→ Kanban 보드 (Notion/Linear)에 Todo → In Progress → Done으로 관리.<br>→ 스프린트 끝날 때 동작하는 결과물이 있어야 함. 안 되면 스코프를 줄인 것.</p>
+
+      <h4 class="content-heading content-heading--blue">바이브코딩 실전 팁</h4>
+      <p class="content-text">→ AI에게 지시할 때 PRD의 해당 기능 + AC + Tech Spec을 같이 줘야 일관된 코드가 나옴<br>→ "이거 만들어줘"보다 "User Flow 3단계의 화면을 만들어줘. Tech Spec의 API 구조를 따르고, AC는 이거야"가 10배 나은 결과물을 줌<br>→ AI가 만든 코드는 반드시 읽고 이해한 후 커밋. 이해 안 되면 설명 요청.<br>→ 하루 끝에 10분간 Code Review 시간 — "오늘 만든 코드에서 나중에 문제 될 것" 체크</p>
+
+      <h4 class="content-heading content-heading--coral">Refactoring 타이밍</h4>
+      <p class="content-text">→ "나중에 고치지" 하면 영원히 안 고침. Technical Debt를 의식적으로 추적.<br>→ 규칙: 같은 코드를 3번 복붙하면 그때 리팩토링. 그전에는 중복이 아직 패턴이 안 된 것.<br>→ 매 3번째 스프린트는 새 기능 대신 리팩토링 스프린트로. 기술 부채를 주기적으로 갚기.</p>
+
+      <h4 class="content-heading content-heading--amber">개발 순서 (이 순서가 중요)</h4>
+      <p class="content-text">① 인증 (로그인/회원가입) — 모든 기능의 기반<br>② DB 스키마 + 핵심 CRUD — 데이터 구조가 잡혀야 화면을 만들 수 있음<br>③ 핵심 기능 1개 — 제품의 존재 이유. SWAI면 "텍스트 입력 → AI 정리"<br>④ 기본 UI/레이아웃 — 네비게이션, 사이드바, 기본 페이지 구조<br>⑤ 나머지 Must 기능들<br>⑥ 결제/구독 (유료 제품이면)</p>
+    </div></div>
+  </div>
+
+  <!-- 5. QA -->
+  <div class="accordion" id="proc-qa">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>✅ 5. QA — 테스트·검증</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> 만든 게 제대로 동작하는지 확인. 1인 개발자가 현실적으로 할 수 있는 수준으로.</p>
+
+      <h4 class="content-heading content-heading--purple">테스트 피라미드 (1인 개발 현실 버전)</h4>
+      <p class="content-text">교과서적인 테스트 피라미드는 Unit → Integration → E2E 순서지만, 1인 개발에서는 현실적으로:</p>
+      <div class="card">
+        <p class="content-text"><strong class="text-green">반드시 해야 할 것:</strong><br>→ Smoke Test: 배포 후 핵심 기능 3~5개 수동 확인. "로그인 되나? 노트 만들어지나? 정리 동작하나?"<br>→ Unit Test: 핵심 비즈니스 로직에만. 모든 함수에 테스트를 쓸 필요 없음. "돈이나 데이터 무결성에 관련된 로직"에만.<br>→ Cross-browser: 크롬 + 사파리 + 모바일 최소 확인. 실제 디바이스로.</p>
+        <p class="content-text"><strong class="text-blue">하면 좋은 것:</strong><br>→ UAT: 주변 사람 2~3명에게 "이거 써봐"하고 옆에서 지켜보기. 어디서 멈추는지, 뭘 헷갈려하는지 관찰.<br>→ Integration Test: API 엔드포인트별 요청/응답 확인.</p>
+        <p class="content-text"><strong class="text-muted">나중에 해도 되는 것:</strong><br>→ E2E Test (Playwright/Cypress): 기능이 10개 이상으로 늘어났을 때.<br>→ Load Test: 사용자 1000명 이상 될 때.<br>→ Regression Test 자동화: 릴리즈 주기가 빨라졌을 때.</p>
+      </div>
+
+      <h4 class="content-heading content-heading--teal">테스트 판단 기준</h4>
+      <p class="content-text">"이 기능이 깨지면 사용자가 돈을 잃거나, 데이터를 잃거나, 서비스를 못 쓰는가?" — Yes면 테스트 필수. No면 수동 확인으로 충분.</p>
+
+      <h4 class="content-heading content-heading--default">QA 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>핵심 기능 Smoke Test 통과</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>결제/데이터 관련 로직 Unit Test 작성</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Chrome + Safari + 모바일 기본 확인</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>주변 2~3명 UAT 완료</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>에러 발생 시 사용자에게 보이는 화면 확인 (빈 화면 아닌지)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>네트워크 끊김/느린 환경 테스트</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- 6. LAUNCH -->
+  <div class="accordion" id="proc-launch">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🚀 6. Launch — 배포·출시</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> 제품을 세상에 내놓고, 초기 사용자를 확보하는 것.</p>
+
+      <h4 class="content-heading content-heading--purple">Launch 전략 선택</h4>
+      <div class="card">
+        <p class="content-text"><strong>옵션 A: Closed Beta (초대제)</strong> — 10~50명에게만 공개. 피드백 밀도 높음. "초대받은" 느낌으로 충성도 형성. Waitlist로 기대감 조성.<br><strong>옵션 B: Open Beta</strong> — 누구나 가입 가능하되 "Beta" 딱지 붙이기. 버그에 대한 관용 확보. 빠른 사용자 확보.<br><strong>옵션 C: 정식 출시</strong> — 완성도 높을 때. Product Hunt / 디스콰이엇 런치와 동시에.</p>
+      </div>
+      <p class="content-text">1인 개발자 추천: 옵션 A → B → C 순서. Closed Beta로 핵심 피드백 받고, Open Beta로 확장하고, 정식 출시.</p>
+
+      <h4 class="content-heading content-heading--teal">Product Hunt / 디스콰이엇 런치 준비</h4>
+      <p class="content-text">→ 런치 2주 전: 랜딩 페이지 완성, OG 태그 설정, 스크린샷/GIF 준비, 한 줄 설명 확정<br>→ 런치 1주 전: 커뮤니티에 미리 공유 (빌드 인 퍼블릭), 지인에게 런치 당일 업보트 요청<br>→ 런치 당일: 오전 9시(PST) 게시, 댓글에 실시간 응답, SNS에 공유<br>→ 런치 후: 방문자 → 가입 전환율 실시간 추적, 피드백 즉시 반영</p>
+
+      <h4 class="content-heading content-heading--coral">GTM (Go-To-Market) 실전</h4>
+      <p class="content-text">→ 채널 1순위: 타겟 사용자가 이미 모여있는 곳 (ADHD 커뮤니티, 생산성 포럼, 개발자 커뮤니티)<br>→ 채널 2순위: SEO (블로그 글 3~5개 미리 작성해서 런치와 동시에 게시)<br>→ 채널 3순위: 소셜 미디어 (트위터/X에 빌드 과정 공유해왔다면 런치 때 팔로워가 초기 사용자)</p>
+
+      <h4 class="content-heading content-heading--default">Launch 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>HTTPS 적용 확인</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>환경변수 production 설정 확인</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>에러 트래킹 연동 (Sentry)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Analytics 연동 (Google Analytics / PostHog)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>개인정보처리방침 게시</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>이용약관 게시</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>사업자 정보 하단 표시</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>OG 태그 / Social Preview 설정 + 카카오톡 공유 테스트</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Google Search Console 등록</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Rollback Plan 준비 (문제 시 이전 버전 복구 방법)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Beta/Launch 전략 결정 + 채널 확정</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>랜딩 페이지 히어로 섹션 검증 (3초 안에 가치 전달?)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>온보딩 흐름 확인 (가입→첫 가치 경험까지 마찰 없는지)</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- 7. ITERATION -->
+  <div class="accordion" id="proc-iteration">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🔄 7. Iteration — 피드백 기반 개선</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-lead"><strong>이 단계의 목표:</strong> 사용자 데이터와 피드백을 기반으로 제품을 반복 개선. 4단계(Development)로 회귀하여 순환.</p>
+
+      <h4 class="content-heading content-heading--purple">피드백 수집 방법</h4>
+      <p class="content-text">→ 정량 데이터: Analytics (어디서 이탈하는지), Funnel 분석 (가입→활성화→결제 전환율)<br>→ 정성 데이터: 사용자 인터뷰, 인앱 피드백 버튼, 이메일 응답, 디스코드/커뮤니티 의견<br>→ 세션 녹화: Hotjar/Clarity로 사용자가 실제로 어떻게 쓰는지 관찰<br>→ NPS 설문: 가입 7일 후 / 30일 후에 자동 발송</p>
+
+      <h4 class="content-heading content-heading--teal">우선순위 결정 프레임워크</h4>
+      <p class="content-text">"다음에 뭘 할까?"를 결정하는 게 Iteration의 핵심. 이 매트릭스로 판단:</p>
+      <div class="matrix-grid">
+        <div class="matrix-cell" style="border-color:var(--green)"><h4 class="text-green">높은 영향 · 낮은 노력</h4><ul><li>즉시 실행. Quick Win.</li><li>버그 수정, 작은 UX 개선</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--blue)"><h4 class="text-blue">높은 영향 · 높은 노력</h4><ul><li>다음 스프린트에 계획.</li><li>새 핵심 기능, 큰 리팩토링</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--amber)"><h4 class="text-amber">낮은 영향 · 낮은 노력</h4><ul><li>여유 있을 때.</li><li>사소한 디자인 개선</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--red)"><h4 class="text-red">낮은 영향 · 높은 노력</h4><ul><li>하지 않음.</li><li>과도한 기능, 오버엔지니어링</li></ul></div>
+      </div>
+
+      <h4 class="content-heading content-heading--coral">새 기능 vs 버그 수정 vs 기술 부채</h4>
+      <p class="content-text">→ 경험적 최적 비율: 새 기능 60% + 버그 수정 20% + 기술 부채 20%<br>→ 사용자에게 영향을 주는 버그는 새 기능보다 항상 우선<br>→ 매 3번째 스프린트는 기술 부채 정리 스프린트로 예약<br>→ "이 기술 부채를 지금 안 갚으면 3개월 후에 어떻게 되는가?"로 긴급도 판단</p>
+
+      <h4 class="content-heading content-heading--amber">Retrospective (회고) 실전법</h4>
+      <p class="content-text">→ 매 스프린트(2주) 끝에 15분만 투자.<br>→ 3가지만 적기: ① 잘된 것 ② 안된 것 ③ 다음에 바꿀 것<br>→ 제품 회고가 아니라 프로세스 회고. "코드를 어떻게 고칠까"가 아니라 "일하는 방식을 어떻게 고칠까"</p>
+
+      <h4 class="content-heading content-heading--green">PMF (Product-Market Fit) 판단 기준</h4>
+      <p class="content-text">→ Day 30 잔존율 20% 이상이면 PMF에 가까움<br>→ "이 제품이 없어지면 매우 실망한다"고 답하는 사용자가 40% 이상이면 PMF<br>→ 3개월간 핵심 지표(North Star Metric)가 0성장이면 피벗 검토<br>→ 다만 초기 3개월은 자연스럽게 느림. 최소 6개월은 지켜봐야 함</p>
+
+      <h4 class="content-heading content-heading--default">Iteration 체크리스트</h4>
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Analytics 데이터 주간 리뷰</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>사용자 피드백 수집 채널 운영 중</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>피드백을 영향/노력 매트릭스로 분류</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Retrospective 2주마다 실행</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Technical Debt 목록 관리 중</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>North Star Metric 정의 및 추적 중</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span>Changelog 업데이트</li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 4: STRATEGY GUIDE
+     ================================================================ -->
+<div class="section" id="sec-strategy">
+  <h2 class="section-title">전략 가이드</h2>
+  <p class="section-desc">수익화, 가격 설계, 마케팅, 사용자 여정, KPI 등 사업 전략을 다룹니다.</p>
+
+  <!-- Revenue Models -->
+  <div class="accordion open">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>💰 수익 모델 유형</h3><span class="accordion-arrow" style="transform:rotate(90deg)">▶</span></div>
+    <div class="accordion-body" style="max-height:5000px"><div class="accordion-content">
+      <table class="model-table">
+        <thead><tr><th>모델</th><th>설명</th><th>적합한 경우</th></tr></thead>
+        <tbody>
+          <tr><td><strong>구독형 (SaaS)</strong></td><td>월/연 반복 결제. MRR이 핵심 지표</td><td>SWAI 같은 도구형 서비스</td></tr>
+          <tr><td><strong>프리미엄</strong></td><td>기본 무료 + 고급 기능 유료</td><td>사용자 풀 확보가 중요할 때</td></tr>
+          <tr><td><strong>원타임 결제</strong></td><td>한 번 구매로 영구 사용</td><td>템플릿, 플러그인, 디지털 상품</td></tr>
+          <tr><td><strong>사용량 기반</strong></td><td>호출 횟수/용량에 따라 과금</td><td>AI API 서비스</td></tr>
+          <tr><td><strong>광고 기반</strong></td><td>무료 서비스 + 광고 수익</td><td>유튜브 자동화, 미디어</td></tr>
+          <tr><td><strong>마켓플레이스 수수료</strong></td><td>거래 중개 후 수수료</td><td>매칭/중개 플랫폼</td></tr>
+          <tr><td><strong>라이선스/화이트라벨</strong></td><td>제품을 B2B로 통째 라이선스</td><td>B2B 고단가 수익</td></tr>
+          <tr><td><strong>하이브리드</strong></td><td>위 모델 조합</td><td>대부분의 성공적 서비스</td></tr>
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+
+  <!-- Revenue Decision Tree -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🌳 수익 모델 의사결정 트리</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="decision-tree">
+        <div class="decision-tree-root"><span class="badge badge-useful">어떤 제품인가?</span></div>
+        <div class="decision-tree-branches">
+          <div class="card">
+            <h4 class="text-teal">도구/SaaS</h4>
+            <p class="content-text">반복 사용? → <strong>구독형 (SaaS)</strong></p>
+            <p class="content-text">AI 호출 많음? → <strong>사용량 기반</strong></p>
+            <p class="content-text">무료 사용자 필요? → <strong>프리미엄</strong></p>
+          </div>
+          <div class="card">
+            <h4 class="text-coral">디지털 상품</h4>
+            <p class="content-text">템플릿/플러그인 → <strong>원타임 결제</strong></p>
+            <p class="content-text">데이터 API → <strong>사용량 기반</strong></p>
+            <p class="content-text">B2B 제공 → <strong>라이선스</strong></p>
+          </div>
+          <div class="card">
+            <h4 class="text-amber">콘텐츠/미디어</h4>
+            <p class="content-text">유튜브/블로그 → <strong>광고 기반</strong></p>
+            <p class="content-text">오픈소스 → <strong>후원/도네이션</strong></p>
+            <p class="content-text">중개/매칭 → <strong>수수료</strong></p>
+          </div>
+          <div class="card">
+            <h4 class="text-green">플랫폼/커뮤니티</h4>
+            <p class="content-text">교육/강의 → <strong>구독형 + 원타임</strong></p>
+            <p class="content-text">커뮤니티 → <strong>멤버십</strong></p>
+            <p class="content-text">마켓플레이스 → <strong>수수료</strong></p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:12px;text-align:center;border-color:var(--green)">
+          <p class="content-text text-green"><strong>대부분의 성공적 서비스 → 하이브리드 (위 모델을 2~3개 조합)</strong></p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Pricing Strategy -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🏷 가격 설계 (Pricing Strategy)</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-card-title text-muted">STARTER</div>
+          <div class="pricing-card-price">무료</div>
+          <div class="pricing-card-desc">핵심 기능 제한<br>앵커링 + 소유 효과 유도</div>
+        </div>
+        <div class="pricing-card" style="border-color:var(--purple)">
+          <div class="badge pricing-popular-badge">인기</div>
+          <div class="pricing-card-title text-muted">PRO</div>
+          <div class="pricing-card-price">₩9,900<span style="font-size:.8rem;font-weight:400">/월</span></div>
+          <div class="pricing-card-desc">전체 기능<br>골디락스 효과로 가장 많이 팔림</div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card-title text-muted">TEAM</div>
+          <div class="pricing-card-price">₩29,900<span style="font-size:.8rem;font-weight:400">/월</span></div>
+          <div class="pricing-card-desc">팀 기능 + 우선 지원<br>앵커링 역할</div>
+        </div>
+      </div>
+      <p class="content-text"><strong>핵심 원칙:</strong> 가치 기반 가격 (원가가 아니라 사용자가 느끼는 가치에 기반) · 3개 플랜이 최적 (골디락스 효과) · 연간 할인 20~40%가 업계 표준 · 초기 사용자에게 낮은 가격 고정 (Grandfather Pricing) · 지역별 PPP 가격 차등 적용</p>
+    </div></div>
+  </div>
+
+  <!-- Customer Journey Funnel -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🛤 사용자 여정 (Customer Journey)</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="funnel">
+        <div class="funnel-step" style="background:var(--purple-bg);color:var(--purple);max-width:100%">📢 인지 (Awareness) — 제품 존재를 처음 알게 됨</div>
+        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:90%">🤔 고려 (Consideration) — 랜딩 페이지 방문, 비교</div>
+        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:78%">✅ 전환 (Conversion) — 가입, 무료 체험 시작</div>
+        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:65%">⚡ 활성화 (Activation) — "아 이거 좋다" 순간</div>
+        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:52%">🔄 유지 (Retention) — 반복 사용, 습관 형성</div>
+        <div class="funnel-step" style="background:var(--coral-bg);color:var(--coral);max-width:40%">📈 확장 (Expansion) — 무료→유료, 업셀</div>
+        <div class="funnel-step" style="background:var(--pink-bg);color:var(--pink);max-width:30%">❤️ 옹호 (Advocacy) — 자발적 추천, 바이럴</div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Marketing Strategy -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>📣 마케팅/그로스 전략</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="matrix-cell" style="border-color:var(--green)"><h4 class="text-green">💰 저비용 · 고효과</h4><ul><li>Build in Public (빌드 인 퍼블릭)</li><li>커뮤니티 마케팅</li><li>Product Hunt / 디스콰이엇 런치</li><li>SEO/콘텐츠 마케팅</li><li>바이럴 루프 설계</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--blue)"><h4 class="text-blue">💰 저비용 · 중효과</h4><ul><li>뉴스레터</li><li>파트너십/콜라보</li><li>레퍼럴 프로그램</li><li>소셜 미디어 운영</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--amber)"><h4 class="text-amber">💸 고비용 · 고효과</h4><ul><li>유료 광고 (CAC &lt; LTV일 때만)</li><li>인플루언서 마케팅</li><li>PR/언론 보도</li></ul></div>
+        <div class="matrix-cell" style="border-color:var(--red)"><h4 class="text-red">💸 고비용 · 저효과 (주의)</h4><ul><li>타겟 없는 광고</li><li>초기 브랜드 광고</li><li>과도한 이벤트/경품</li></ul></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- KPI Guide -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>📊 KPI/지표 가이드</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <table class="bench-table">
+        <thead><tr><th>지표</th><th>의미</th><th>건강한 수치</th><th>위험 신호</th><th>개선 방법</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>전환율</strong> (방문→가입)</td>
+            <td>랜딩 페이지 효과</td>
+            <td class="bench-good">2~5%</td>
+            <td class="bench-bad">1% 미만</td>
+            <td class="bench-tip">히어로 카피 A/B 테스트, CTA 명확화, 소셜 증거 추가</td>
+          </tr>
+          <tr>
+            <td><strong>무료→유료 전환</strong></td>
+            <td>제품 가치 증명</td>
+            <td class="bench-good">2~5%</td>
+            <td class="bench-bad">1% 미만</td>
+            <td class="bench-tip">무료→유료 경계 재설계, 한도 도달 시점에 업셀, Time to Value 단축</td>
+          </tr>
+          <tr>
+            <td><strong>월간 이탈률</strong> (Churn)</td>
+            <td>사용자 유지력</td>
+            <td class="bench-good">5% 미만</td>
+            <td class="bench-bad">10% 초과</td>
+            <td class="bench-tip">해지 사유 설문, 리인게이지먼트 이메일, 핵심 기능 온보딩 강화</td>
+          </tr>
+          <tr>
+            <td><strong>Day 1 잔존율</strong></td>
+            <td>온보딩 효과</td>
+            <td class="bench-good">40% 이상</td>
+            <td class="bench-bad">20% 미만</td>
+            <td class="bench-tip">첫 경험 단순화, 튜토리얼 개선, "아하 모먼트"까지 단계 줄이기</td>
+          </tr>
+          <tr>
+            <td><strong>Day 30 잔존율</strong></td>
+            <td>제품 가치</td>
+            <td class="bench-good">20% 이상</td>
+            <td class="bench-bad">10% 미만</td>
+            <td class="bench-tip">습관 형성 루프 설계, 주기적 알림, 콘텐츠 업데이트</td>
+          </tr>
+          <tr>
+            <td><strong>LTV/CAC 비율</strong></td>
+            <td>수익 건전성</td>
+            <td class="bench-good">3:1 이상</td>
+            <td class="bench-bad">1:1 미만</td>
+            <td class="bench-tip">CAC 낮추기(유기적 채널), LTV 높이기(업셀/연간 플랜)</td>
+          </tr>
+          <tr>
+            <td><strong>NPS</strong></td>
+            <td>추천 의향</td>
+            <td class="bench-good">50 이상</td>
+            <td class="bench-bad">0 미만</td>
+            <td class="bench-tip">Detractor 피드백 즉시 대응, Promoter에게 레퍼럴 요청</td>
+          </tr>
+          <tr>
+            <td><strong>페이지 로딩</strong></td>
+            <td>성능</td>
+            <td class="bench-good">2.5초 이내</td>
+            <td class="bench-bad">4초 초과</td>
+            <td class="bench-tip">이미지 최적화, CDN, 코드 스플리팅, lazy loading</td>
+          </tr>
+          <tr>
+            <td><strong>MVP 개발 기간</strong></td>
+            <td>스코프 적정성</td>
+            <td class="bench-good">2~6주</td>
+            <td class="bench-bad">8주 초과</td>
+            <td class="bench-tip">Must 기능 재검토, Won't 목록 강화, 기능 더 쪼개기</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 class="content-heading content-heading--purple">AARRR 해적 지표 (단계별 핵심 지표)</h4>
+      <div class="funnel">
+        <div class="funnel-step" style="background:var(--purple-bg);color:var(--purple);max-width:100%">📢 Acquisition (획득) — 사용자가 어디서 오는가? → 채널별 유입 수, CAC</div>
+        <div class="funnel-step" style="background:var(--blue-bg);color:var(--blue);max-width:90%">⚡ Activation (활성화) — "아하 모먼트"에 도달했는가? → Day 1 잔존율, Time to Value</div>
+        <div class="funnel-step" style="background:var(--teal-bg);color:var(--teal);max-width:78%">🔄 Retention (유지) — 계속 돌아오는가? → Day 7/30 잔존율, DAU/MAU</div>
+        <div class="funnel-step" style="background:var(--green-bg);color:var(--green);max-width:65%">💰 Revenue (수익) — 돈을 내는가? → MRR, ARPU, 무료→유료 전환율</div>
+        <div class="funnel-step" style="background:var(--amber-bg);color:var(--amber);max-width:52%">📣 Referral (추천) — 다른 사람에게 알리는가? → NPS, K-factor, 레퍼럴 전환율</div>
+      </div>
+
+      <h4 class="content-heading content-heading--teal">핵심 지표 세부 설명</h4>
+      <div class="matrix-grid">
+        <div class="card"><div class="card-title">⭐ North Star Metric</div><p class="card-desc">제품 핵심 가치를 대표하는 단 하나의 지표. SWAI면 "주당 정리된 노트 수". 이게 올라가면 다른 지표도 따라옴.</p></div>
+        <div class="card"><div class="card-title">👥 DAU / MAU</div><p class="card-desc">일간/월간 활성 사용자. 사용자가 실제로 쓰고 있는지의 기본 지표. DAU/MAU 비율이 높을수록 습관화된 제품.</p></div>
+        <div class="card"><div class="card-title">💵 MRR / ARR</div><p class="card-desc">월간/연간 반복 수익. SaaS의 기본 건강 지표. MRR = 유료 사용자 수 × 평균 결제 금액.</p></div>
+        <div class="card"><div class="card-title">💎 LTV</div><p class="card-desc">Customer Lifetime Value. 고객 한 명이 전체 기간 동안 가져다주는 총 수익. LTV = ARPU ÷ 월간 이탈률.</p></div>
+        <div class="card"><div class="card-title">💸 CAC</div><p class="card-desc">Customer Acquisition Cost. 고객 한 명 획득 비용. LTV/CAC ≥ 3이어야 건강. &lt;1이면 돈 쓸수록 손해.</p></div>
+        <div class="card"><div class="card-title">🔥 Burn Rate / Runway</div><p class="card-desc">월간 지출 속도와 남은 자금으로 버틸 수 있는 기간. Runway = 잔고 ÷ 월 지출. 6개월 미만이면 MVP 범위 축소.</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- UX Psychology -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🧠 사용자 심리 설계</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="card"><div class="card-title">⏱ Time to Value</div><p class="card-desc">"아 이거 좋다"까지의 시간을 최소화</p></div>
+        <div class="card"><div class="card-title">😱 손실 회피</div><p class="card-desc">경험한 가치를 잃을까봐 결제하는 심리</p></div>
+        <div class="card"><div class="card-title">⚓ 앵커링</div><p class="card-desc">비싼 플랜을 먼저 보여줘 중간 플랜이 합리적으로 느끼게</p></div>
+        <div class="card"><div class="card-title">📦 소유 효과</div><p class="card-desc">무료 체험 중 데이터를 쌓게 해서 해지를 어렵게</p></div>
+        <div class="card"><div class="card-title">🎯 기본값의 힘</div><p class="card-desc">아무것도 안 건드려도 최적 경험이 되도록 설계</p></div>
+        <div class="card"><div class="card-title">📊 진행감</div><p class="card-desc">완성도 80% 표시 → 완성하고 싶은 욕구 (자이가르닉 효과)</p></div>
+        <div class="card"><div class="card-title">🎭 사회적 증거</div><p class="card-desc">"1만 명이 사용 중" 한 줄이 기능 설명 10줄보다 강력</p></div>
+        <div class="card"><div class="card-title">🏔 선택 역설</div><p class="card-desc">선택지가 많으면 결정 못 함. 2~3개가 최적</p></div>
+        <div class="card"><div class="card-title">🎬 피크-엔드 법칙</div><p class="card-desc">가장 강렬한 순간과 마지막 순간만 기억. 핵심 순간의 임팩트가 중요</p></div>
+        <div class="card"><div class="card-title">👋 첫인상 설계</div><p class="card-desc">랜딩 페이지 3초 안에 "이게 뭔지, 왜 필요한지" 전달 못 하면 이탈</p></div>
+        <div class="card"><div class="card-title">🚧 마찰 제거</div><p class="card-desc">회원가입 단계 하나 늘 때마다 전환율 20~30% 하락. 소셜 로그인, 이메일만으로 시작</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Branding -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🎨 브랜딩 / 포지셔닝</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="card"><div class="card-title">📛 네이밍</div><p class="card-desc">짧고 기억하기 쉬운 이름. 도메인 확보 + 상표 등록 가능 여부 확인</p></div>
+        <div class="card"><div class="card-title">🎨 비주얼 아이덴티티</div><p class="card-desc">로고, 브랜드 컬러, 톤앤매너. 일관된 시각 정체성 = "진지한 서비스" 인식</p></div>
+        <div class="card"><div class="card-title">📍 포지셔닝 스테이트먼트</div><p class="card-desc">"[타겟]을 위한 [카테고리]로, [경쟁사]와 달리 [차별점]을 제공한다" 한 문장</p></div>
+        <div class="card"><div class="card-title">🗣 톤 오브 보이스</div><p class="card-desc">앱 텍스트, 에러 메시지, 이메일까지 일관된 말투</p></div>
+        <div class="card"><div class="card-title">📖 스토리텔링</div><p class="card-desc">"왜 이걸 만들게 됐는가"의 창업 스토리. 공감과 신뢰 형성</p></div>
+        <div class="card"><div class="card-title">👥 커뮤니티 빌딩</div><p class="card-desc">디스코드, 카카오톡 오픈채팅. 초기 사용자 10명이 전도사가 됨</p></div>
+        <div class="card"><div class="card-title">📱 빌드 인 퍼블릭</div><p class="card-desc">개발 과정 공개 → 팔로워 = 초기 사용자. 트위터, 인디해커스, 디스콰이엇</p></div>
+        <div class="card"><div class="card-title">🗺 경쟁자 포지셔닝 맵</div><p class="card-desc">X/Y축에 핵심 속성, 경쟁 제품 위치 시각화. "비어있는 곳"을 찾는 도구</p></div>
+        <div class="card"><div class="card-title">📰 미디어 킷</div><p class="card-desc">로고, 스크린샷, 핵심 수치 한 페이지. PR 기회를 놓치지 않게</p></div>
+        <div class="card"><div class="card-title">🔗 레퍼럴 프로그램</div><p class="card-desc">"친구 초대하면 1개월 무료". K-factor > 1이면 자체 성장</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Scaling -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>📈 확장 전략 (Scaling Strategy)</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="card"><div class="card-title">🏗 코드 확장성</div><p class="card-desc">모노리스에서 시작하되 모듈별 분리. 나중에 분리 가능한 구조</p></div>
+        <div class="card"><div class="card-title">👥 팀 확장 준비</div><p class="card-desc">문서화(README, CLAUDE.md, 코드 컨벤션) 없으면 인수인계 불가</p></div>
+        <div class="card"><div class="card-title">📱 다중 채널 확장</div><p class="card-desc">웹→모바일→데스크톱→API 공개. API-first 설계가 핵심</p></div>
+        <div class="card"><div class="card-title">💰 가격 체계 확장</div><p class="card-desc">무료→프로→팀→엔터프라이즈. 초기부터 DB 스키마에 반영</p></div>
+        <div class="card"><div class="card-title">🌍 글로벌 확장</div><p class="card-desc">다국어, 다중 통화, 타임존. i18n을 초기에 안 넣으면 나중에 전체 수정</p></div>
+        <div class="card"><div class="card-title">🔌 API/플러그인 공개</div><p class="card-desc">다른 개발자가 위에 기능을 만들 수 있게. Notion, Shopify 성장 전략</p></div>
+        <div class="card"><div class="card-title">🏷 화이트라벨</div><p class="card-desc">다른 회사가 자기 브랜드로 쓸 수 있게 제공. B2B 수익화</p></div>
+        <div class="card"><div class="card-title">🚪 Exit 전략</div><p class="card-desc">매각 시 코드 품질, 문서화, 수익 구조의 깔끔함이 기업가치에 직접 영향</p></div>
+        <div class="card"><div class="card-title">🤝 M&A 대비</div><p class="card-desc">인디해커스에서 사이드 프로젝트가 수억에 매각되는 사례 존재</p></div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 5: TECH REFERENCE
+     ================================================================ -->
+<div class="section" id="sec-techref">
+  <h2 class="section-title">기술 레퍼런스</h2>
+  <p class="section-desc">기술 스택 선택 가이드, 분야별 개발 프로세스, 개발자 도구를 다룹니다.</p>
+
+  <input type="text" class="glossary-search" id="techSearch" placeholder="기술 스택 검색... (예: React, Supabase, FFmpeg)" oninput="filterTechStack()">
+
+  <!-- Tech Stack -->
+  <div class="accordion open">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🧱 기술 스택 가이드</h3><span class="accordion-arrow" style="transform:rotate(90deg)">▶</span></div>
+    <div class="accordion-body" style="max-height:5000px"><div class="accordion-content">
+      <div id="techStackList"></div>
+    </div></div>
+  </div>
+
+  <!-- Dev Tools -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🔧 개발자 도구/환경</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="stack-grid"><div class="stack-item"><strong>VS Code / Cursor</strong><span>AI 통합 IDE</span></div><div class="stack-item"><strong>Claude Code</strong><span>CLI 기반 AI 코딩 도구</span></div><div class="stack-item"><strong>GitHub Copilot</strong><span>코드 자동 완성</span></div><div class="stack-item"><strong>Figma</strong><span>UI/UX 디자인</span></div><div class="stack-item"><strong>Notion / Linear</strong><span>프로젝트 관리</span></div><div class="stack-item"><strong>Postman / Bruno</strong><span>API 테스트</span></div><div class="stack-item"><strong>Warp / iTerm2</strong><span>터미널</span></div><div class="stack-item"><strong>Excalidraw</strong><span>빠른 와이어프레임</span></div></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 6: OPS GUIDE
+     ================================================================ -->
+<div class="section" id="sec-ops">
+  <h2 class="section-title">운영/생존 가이드</h2>
+  <p class="section-desc">운영 자동화, 루틴, 리스크 관리, 법적 필수 사항을 다룹니다.</p>
+
+  <!-- Operating Cadence -->
+  <div class="accordion open">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>⏰ 운영 루틴 (Operating Cadence)</h3><span class="accordion-arrow" style="transform:rotate(90deg)">▶</span></div>
+    <div class="accordion-body" style="max-height:5000px"><div class="accordion-content">
+      <div class="ops-cadence">
+        <div class="ops-cadence-item"><div class="ops-cadence-label" style="color:var(--purple)">일간</div><div class="ops-cadence-content" style="border-left-color:var(--purple);background:var(--purple-bg)">에러/알림 확인 · 사용자 피드백 확인 · 핵심 개발 작업 (딥 워크 블록 확보)</div></div>
+        <div class="ops-cadence-item"><div class="ops-cadence-label" style="color:var(--teal)">주간</div><div class="ops-cadence-content" style="border-left-color:var(--teal);background:var(--teal-bg)">주요 지표(DAU, 가입 수, 수익) 확인 · 스프린트 회고 · 다음 주 스코핑 · 콘텐츠 1개 발행</div></div>
+        <div class="ops-cadence-item"><div class="ops-cadence-label" style="color:var(--blue)">월간</div><div class="ops-cadence-content" style="border-left-color:var(--blue);background:var(--blue-bg)">MRR/이탈률 분석 · 비용 점검(서버, API) · 경쟁사 동향 · 로드맵 조정 · 사용자 인터뷰 1~2건</div></div>
+        <div class="ops-cadence-item"><div class="ops-cadence-label" style="color:var(--amber)">분기</div><div class="ops-cadence-content" style="border-left-color:var(--amber);background:var(--amber-bg)">전체 방향성 점검 · 가격 정책 재검토 · 기술 부채 정리 스프린트 · 법적/세무 점검</div></div>
+        <div class="ops-cadence-item"><div class="ops-cadence-label" style="color:var(--coral)">연간</div><div class="ops-cadence-content" style="border-left-color:var(--coral);background:var(--coral-bg)">세금 신고 · 상표 갱신 · 연간 회고 및 목표 설정 · 인프라 비용 전체 점검</div></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Ops Automation -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🤖 운영 자동화</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>CS 자동화</strong> — FAQ 챗봇, 자동 응답 이메일, 셀프서비스 헬프센터</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>과금 자동화</strong> — 결제 실패 자동 재시도, 만료 알림, 세금계산서 자동 발행</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>배포 자동화</strong> — 코드 푸시 → 테스트 → 빌드 → 배포 파이프라인</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>모니터링 알림</strong> — 서버 다운, 에러 급증, 비용 임계치 초과 시 자동 알림</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>온보딩 시퀀스</strong> — 웰컴 이메일 → 팁 → 프리미엄 유도 자동화</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>백업 자동화</strong> — 크론잡 일일 자동 백업 + 주기적 복구 테스트</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>콘텐츠 발행 자동화</strong> — 블로그 예약, SNS 자동 포스팅, 뉴스레터</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- Risk Management -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>⚠️ 리스크 관리</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="anti-card"><h4>번아웃</h4><p>주 50시간 이상 → 생산성 하락. 의식적 휴식 계획 필요.</p></div>
+        <div class="anti-card" style="border-left-color:var(--amber)"><h4 style="color:var(--amber)">버스 팩터 = 1</h4><p>문서화, 비밀번호 관리, 자동화된 배포로 리스크 완화.</p></div>
+        <div class="anti-card" style="border-left-color:var(--coral)"><h4 style="color:var(--coral)">의존성 리스크</h4><p>특정 서비스 100% 의존 → 대체 가능한 설계 필요.</p></div>
+        <div class="anti-card" style="border-left-color:var(--purple)"><h4 style="color:var(--purple)">기술 락인</h4><p>추상화 레이어 또는 표준 기술(PostgreSQL 등) 사용.</p></div>
+        <div class="anti-card" style="border-left-color:var(--blue)"><h4 style="color:var(--blue)">규제 변경</h4><p>AI 규제, 플랫폼 정책 변경. 단일 플랫폼 의존은 사업 리스크.</p></div>
+        <div class="anti-card" style="border-left-color:var(--teal)"><h4 style="color:var(--teal)">데이터 유출</h4><p>72시간 내 신고 의무. 대응 계획 사전 수립 필수.</p></div>
+        <div class="anti-card" style="border-left-color:var(--pink)"><h4 style="color:var(--pink)">수익 다각화 실패</h4><p>수익원이 하나면 막히면 끝. 구독 + 원타임 + 어필리에이트 + API 조합.</p></div>
+        <div class="anti-card" style="border-left-color:var(--green)"><h4 style="color:var(--green)">법적 분쟁 대비 부재</h4><p>이용약관에 면책 조항, 서비스 중단 권리, 환불 정책 명확히. AI 서비스는 "잘못된 정보" 면책 필수.</p></div>
+        <div class="anti-card" style="border-left-color:var(--amber)"><h4 style="color:var(--amber)">경쟁자 진입</h4><p>대기업이 같은 기능 무료 출시하면? "기능"이면 죽고 "커뮤니티/특화 경험"이면 살아남음.</p></div>
+        <div class="anti-card" style="border-left-color:var(--coral)"><h4 style="color:var(--coral)">환율/국제 정세</h4><p>해외 결제 수익은 환율 변동에 직접 영향. 달러 약세 시 원화 환산 수익 감소.</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Legal -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>⚖️ 법적/사업 필수 사항</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <ul class="checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>사업자등록 + 통신판매업 신고</strong> — 유료 서비스 운영 시 법적 필수</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>개인정보처리방침 게시</strong> — 이름, 이메일만 받아도 필수</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>전자상거래법 표시</strong> — 사업자 정보, 환불 규정 하단 표시</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>PG사 심사</strong> — 1~2주 소요, 개발 완료 전 신청 권장</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>상표 등록</strong> — 키프리스 검색 후 초기 등록 권장</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>세금/회계</strong> — 삼쩜삼, 자비스 활용. 해외 수익은 외화 신고 별도</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span><strong>AI 콘텐츠 저작권</strong> — 법적으로 불명확한 영역, 리스크 인식 필요</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- Cost Optimization -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>💵 비용 최적화</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <p class="content-text"><strong>무료 티어 활용 (월 $0 시작):</strong> Vercel(무료) + Supabase(무료) + Cloudflare(무료) + GitHub(무료)</p>
+      <p class="content-text"><strong>AI API 비용 절감:</strong> 캐싱 · 요청 배칭 · 모델 티어 분리 (간단한 요청은 저렴한 모델, 복잡한 요청만 고급 모델)</p>
+      <p class="content-text"><strong>CDN/이미지 최적화:</strong> Cloudflare Images, Vercel Image Optimization 활용. 이미지 트래픽이 서버비의 주범인 경우가 많음. WebP/AVIF 포맷 변환, lazy loading 적용.</p>
+      <p class="content-text"><strong>서버리스 vs VPS 전환 시점:</strong> 트래픽이 적을 때(월 100만 요청 이하)는 서버리스가 압도적으로 저렴. 일정 규모 넘으면(월 $50+ 서버리스 비용) VPS($5~10/월)가 더 싸져. 이 전환 시점을 인식해야 해.</p>
+      <p class="content-text"><strong>수익 보호:</strong> Stripe Radar(부정결제 방어) · 동시접속 제한 · API 키 남용 방지 · 크롤링 방어</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 7: MINDSET & REFERENCE
+     ================================================================ -->
+<div class="section" id="sec-mindset">
+  <h2 class="section-title">마인드셋 / 레퍼런스</h2>
+  <p class="section-desc">1인 개발자의 심리 관리, 실패 패턴, 벤치마크, 참고 자료를 다룹니다.</p>
+
+  <!-- Founder Mindset -->
+  <div class="accordion open">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🧠 Founder Mindset</h3><span class="accordion-arrow" style="transform:rotate(90deg)">▶</span></div>
+    <div class="accordion-body" style="max-height:5000px"><div class="accordion-content">
+      <div class="matrix-grid">
+        <div class="card"><div class="card-title">🎭 임포스터 신드롬</div><p class="card-desc">"나는 진짜 개발자가 아닌데" — 인식하는 것만으로 절반 해결</p></div>
+        <div class="card"><div class="card-title">📊 비교 함정</div><p class="card-desc">"MRR $50K 달성!" 뒤의 99% 실패는 보이지 않음. 생존자 편향.</p></div>
+        <div class="card"><div class="card-title">⚡ 의사결정 피로</div><p class="card-desc">되돌릴 수 있는 결정은 5분 안에. 결정을 미루면 마비됨.</p></div>
+        <div class="card"><div class="card-title">🏝 고립감</div><p class="card-desc">커뮤니티 참여, 코워킹, 1인 개발자 모임으로 해소.</p></div>
+        <div class="card"><div class="card-title">💸 수익 불안</div><p class="card-desc">런웨이(남은 개월 수)를 명확히 계산하면 불안이 줄어듦.</p></div>
+        <div class="card"><div class="card-title">🔄 완벽주의 vs 실행</div><p class="card-desc">80%면 출시. "Done is better than perfect."</p></div>
+        <div class="card"><div class="card-title">🎯 스코프 불안</div><p class="card-desc">MVP의 핵심은 "안 넣는 용기". 경쟁사 기능에 흔들리지 않기.</p></div>
+        <div class="card"><div class="card-title">📚 학습 vs 실행</div><p class="card-desc">Just-in-time Learning: 지금 제품에 필요한 것만 즉시 배우기.</p></div>
+        <div class="card"><div class="card-title">🧩 멀티태스킹 함정</div><p class="card-desc">시간 블록킹: 오전은 개발만, 오후 1시간은 마케팅만.</p></div>
+        <div class="card"><div class="card-title">🏁 성공 정의</div><p class="card-desc">자기만의 기준 없으면 남의 기준으로 자기를 평가하게 됨.</p></div>
+        <div class="card"><div class="card-title">🔄 피벗 판단</div><p class="card-desc">3개월간 성장 지표 0이면 PMF 의심. 다만 초기 3개월은 느린 게 정상, 최소 6개월 관찰.</p></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Anti-patterns -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)"><h3>🚫 실패 패턴 (Anti-patterns)</h3><span class="accordion-arrow">▶</span></div>
+    <div class="accordion-body"><div class="accordion-content">
+      <div class="anti-card"><h4>Feature Creep</h4><p>MVP에 기능을 계속 추가하다 영원히 출시 못 함. 가장 흔한 사망 원인.</p></div>
+      <div class="anti-card"><h4>Resume Driven Development</h4><p>배우고 싶은 기술을 억지로 넣는 것. 익숙한 기술로 빠르게 만들기.</p></div>
+      <div class="anti-card"><h4>피드백 없는 개발</h4><p>6개월간 아무에게도 안 보여주고 만들다가 아무도 안 쓰는 제품 출시.</p></div>
+      <div class="anti-card"><h4>가격 설정 실패</h4><p>너무 싸게 시작하면 올리기 어려움. 처음부터 유료 + 무료 체험.</p></div>
+      <div class="anti-card"><h4>단일 채널 의존</h4><p>트래픽 80%가 한 채널이면, 알고리즘 변경 한 번에 끝.</p></div>
+      <div class="anti-card"><h4>지표 무시</h4><p>감으로 운영하면 문제의 원인을 알 수 없음. Analytics 필수.</p></div>
+    </div></div>
+  </div>
+
+</div>
+
+<!-- ================================================================
+     SECTION: REFERENCE / RESOURCES
+     ================================================================ -->
+<div class="section" id="sec-reference">
+  <h2 class="section-title">추천 리소스</h2>
+  <p class="section-desc">1인 개발자에게 유용한 책, 커뮤니티, 학습 채널, 도구를 정리했습니다. 링크를 클릭하면 해당 사이트로 이동합니다.</p>
+
+  <!-- 필독서 -->
+  <div class="card">
+    <div class="card-title">📚 필독서</div>
+    <div class="stack-grid">
+      <a href="https://www.yes24.com/Product/Goods/7921196" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Lean Startup</strong>
+        <span>Eric Ries — MVP 기반 시장 검증의 바이블</span>
+      </a>
+      <a href="https://www.yes24.com/Product/Goods/15624274" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Zero to One</strong>
+        <span>Peter Thiel — 경쟁 없는 시장을 만드는 법</span>
+      </a>
+      <a href="https://www.yes24.com/Product/Goods/97883533" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>The Mom Test</strong>
+        <span>Rob Fitzpatrick — 사용자 인터뷰 방법론</span>
+      </a>
+      <a href="https://www.yes24.com/Product/Goods/44064465" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Shape Up</strong>
+        <span>Basecamp — 6주 사이클 개발 방법론 (무료 공개)</span>
+      </a>
+      <a href="https://www.yes24.com/Product/Goods/108748841" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>인스파이어드</strong>
+        <span>Marty Cagan — 제품 관리의 정석</span>
+      </a>
+      <a href="https://www.yes24.com/Product/Goods/4045732" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>린 분석</strong>
+        <span>Alistair Croll — 데이터 기반 스타트업 성장</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 커뮤니티 -->
+  <div class="card">
+    <div class="card-title">👥 커뮤니티</div>
+    <div class="stack-grid">
+      <a href="https://www.indiehackers.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Indie Hackers</strong>
+        <span>독립 개발자 인터뷰 + 커뮤니티</span>
+      </a>
+      <a href="https://disquiet.io" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>디스콰이엇</strong>
+        <span>한국 메이커 커뮤니티 + 제품 런치</span>
+      </a>
+      <a href="https://www.producthunt.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Product Hunt</strong>
+        <span>글로벌 제품 런치 플랫폼</span>
+      </a>
+      <a href="https://news.ycombinator.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Hacker News</strong>
+        <span>기술/스타트업 뉴스 + Show HN 런치</span>
+      </a>
+      <a href="https://www.reddit.com/r/SideProject/" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>r/SideProject</strong>
+        <span>사이드 프로젝트 공유 레딧</span>
+      </a>
+      <a href="https://acquire.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Acquire.com</strong>
+        <span>SaaS/사이드 프로젝트 매각 마켓플레이스</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 학습 채널 -->
+  <div class="card">
+    <div class="card-title">🎓 학습 채널</div>
+    <div class="stack-grid">
+      <a href="https://nomadcoders.co" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>노마드 코더</strong>
+        <span>한국어 웹/앱 개발 강의</span>
+      </a>
+      <a href="https://opentutorials.org" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>생활코딩</strong>
+        <span>한국어 프로그래밍 입문</span>
+      </a>
+      <a href="https://www.youtube.com/@Fireship" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Fireship</strong>
+        <span>영어, 기술 트렌드 빠른 요약</span>
+      </a>
+      <a href="https://www.youtube.com/@t3dotgg" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Theo (t3.gg)</strong>
+        <span>영어, 프론트엔드/풀스택 실전</span>
+      </a>
+      <a href="https://www.youtube.com/@developedbyed" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>developedbyed</strong>
+        <span>영어, 웹 개발 + UI/UX</span>
+      </a>
+      <a href="https://www.youtube.com/@joshtriedcoding" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Josh tried coding</strong>
+        <span>영어, Next.js/풀스택 프로젝트</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 유용한 도구 -->
+  <div class="card">
+    <div class="card-title">🔧 유용한 도구</div>
+    <div class="stack-grid">
+      <a href="https://hotjar.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Hotjar / Clarity</strong>
+        <span>히트맵, 세션 리플레이</span>
+      </a>
+      <a href="https://canny.io" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Canny</strong>
+        <span>기능 요청 수집 + 투표</span>
+      </a>
+      <a href="https://mintlify.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Mintlify</strong>
+        <span>기술 문서 호스팅</span>
+      </a>
+      <a href="https://convertkit.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>ConvertKit / Beehiiv</strong>
+        <span>뉴스레터 마케팅</span>
+      </a>
+      <a href="https://testimonial.to" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Testimonial.to</strong>
+        <span>사용자 리뷰 수집</span>
+      </a>
+      <a href="https://excalidraw.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Excalidraw</strong>
+        <span>빠른 와이어프레임/다이어그램</span>
+      </a>
+      <a href="https://posthog.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>PostHog</strong>
+        <span>오픈소스 제품 분석 + A/B 테스트</span>
+      </a>
+      <a href="https://linear.app" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Linear</strong>
+        <span>프로젝트/이슈 관리</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 성공 사례 분석 -->
+  <div class="card">
+    <div class="card-title">🏆 1인 개발 성공 사례 소스</div>
+    <div class="stack-grid">
+      <a href="https://www.indiehackers.com/interviews" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Indie Hackers 인터뷰</strong>
+        <span>수익 공개 인터뷰 모음</span>
+      </a>
+      <a href="https://disquiet.io/makers" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>디스콰이엇 메이커 스토리</strong>
+        <span>한국 메이커 성공/실패 사례</span>
+      </a>
+      <a href="https://www.producthunt.com/leaderboard/weekly" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>Product Hunt Weekly Top</strong>
+        <span>주간 인기 제품 분석</span>
+      </a>
+      <a href="https://microfounder.com" target="_blank" rel="noopener" class="stack-item stack-item--link">
+        <strong>MicroFounder</strong>
+        <span>마이크로 SaaS 사례 모음</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     SECTION 8: INDUSTRY GUIDE (rendered by JS)
+     ================================================================ -->
+<div class="section" id="sec-industry">
+  <h2 class="section-title">산업분야 가이드</h2>
+  <p class="section-desc">분야를 선택하면 해당 분야에 맞는 프로세스, 산출물, 기술 스택, 치트키가 표시됩니다.</p>
+
+  <div class="cheat-toggle">
+    <label>
+      <div class="cheat-switch" id="cheatSwitch" onclick="toggleCheat()"></div>
+      🔑 치트키 / 핵심 / 수익화 팁 보기
+    </label>
+  </div>
+
+  <div class="ind-tabs" id="indTabs"><!-- Rendered by industry.js --></div>
+  <div id="indContent"><!-- Rendered by industry.js --></div>
+</div>
+
+</div><!-- /content -->
+</main>
+</div><!-- /layout -->
+
+<!-- ===== COMMAND PALETTE (Ctrl+K) ===== -->
+<div class="cmd-overlay" id="cmdOverlay">
+  <div class="cmd-box">
+    <input type="text" class="cmd-input" id="cmdInput" placeholder="용어, 섹션, 개념 검색..." oninput="cmdSearch(this.value)" onkeydown="cmdKeydown(event)">
+    <div class="cmd-results" id="cmdResults"></div>
+  </div>
+</div>
+
+<!-- ===== HELP OVERLAY (F1) ===== -->
+<div class="help-overlay" id="helpOverlay">
+  <div class="help-box">
+    <h2>사용 가이드</h2>
+    <div class="help-row"><span class="help-label">검색 열기</span><span class="help-key"><kbd>Ctrl</kbd>+<kbd>K</kbd></span></div>
+    <div class="help-row"><span class="help-label">도움말 열기/닫기</span><span class="help-key"><kbd>F1</kbd></span></div>
+    <div class="help-row"><span class="help-label">오버레이 닫기</span><span class="help-key"><kbd>ESC</kbd></span></div>
+    <div class="help-row"><span class="help-label">브라우저 텍스트 검색</span><span class="help-key"><kbd>Ctrl</kbd>+<kbd>F</kbd></span></div>
+    <div class="help-row"><span class="help-label">사이드바 네비게이션</span><span class="help-label" style="color:var(--tx-3)">좌측 메뉴 클릭으로 섹션 이동</span></div>
+    <div class="help-row"><span class="help-label">용어집 필터</span><span class="help-label" style="color:var(--tx-3)">카테고리 버튼으로 용어 필터링</span></div>
+    <div class="help-row"><span class="help-label">체크리스트</span><span class="help-label" style="color:var(--tx-3)">체크박스 클릭으로 진행 상태 표시</span></div>
+    <div class="help-row"><span class="help-label">테마 전환</span><span class="help-label" style="color:var(--tx-3)">사이드바 하단 Dark/Spring 버튼</span></div>
+    <div class="help-close-hint">아무 곳이나 클릭하거나 ESC를 누르면 닫힙니다</div>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<!-- Data (loaded first) -->
+<script src="data/glossary-data.js"></script>
+<script src="data/industry-data.js"></script>
+<script src="data/tech-stack-data.js"></script>
+<script src="data/tech-render-data.js"></script>
+<!-- Modules (loaded in dependency order) -->
+<script src="js/theme.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/glossary.js"></script>
+<script src="js/command.js"></script>
+<script src="js/industry.js"></script>
+<script src="js/techstack.js"></script>
+<script src="js/bookmarks.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

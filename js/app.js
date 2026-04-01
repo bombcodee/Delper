@@ -13,6 +13,22 @@ renderTechStack();
 /* Initialize industry tabs */
 initIndustry();
 
+/* ===== AI TAB SWITCHING ===== */
+function showAiTab(tabId) {
+  document.querySelectorAll('.ai-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.ai-panel').forEach(function(p) { p.classList.remove('active'); });
+
+  var tabs = document.querySelectorAll('.ai-tab');
+  tabs.forEach(function(t) {
+    if (t.textContent.toLowerCase().indexOf(tabId === 'vibecoding' ? '바이브' : tabId === 'ai-usage' ? 'ai 활용' : '하네스') !== -1) {
+      t.classList.add('active');
+    }
+  });
+
+  var panel = document.getElementById('panel-' + tabId);
+  if (panel) panel.classList.add('active');
+}
+
 /* ===== HELP OVERLAY (F1) ===== */
 function toggleHelp() {
   document.getElementById('helpOverlay').classList.toggle('show');

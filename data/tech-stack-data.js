@@ -32,6 +32,7 @@ const SECTION_NAV_DATA = [
   {name:'기술 레퍼런스',id:'techref',icon:'⚙️'},
   {name:'운영/생존 가이드',id:'ops',icon:'🛠'},
   {name:'산업분야 가이드',id:'industry',icon:'🏭'},
+  {name:'AI & 자동화',id:'ai',icon:'🤖'},
   {name:'마인드셋/레퍼런스',id:'mindset',icon:'🧠'},
   {name:'추천 리소스',id:'reference',icon:'📚'}
 ];

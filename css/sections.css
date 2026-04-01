@@ -637,3 +637,49 @@
     width: auto;
   }
 }
+
+
+/* ===== AI & 자동화 섹션 ===== */
+.ai-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: var(--bg-2);
+  border-radius: 10px;
+  padding: 4px;
+  border: 1px solid var(--bd);
+}
+
+.ai-tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: var(--tx-2);
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--ts);
+  font-family: var(--font-main);
+}
+
+.ai-tab:hover {
+  color: var(--tx-1);
+  background: var(--bg-hover);
+}
+
+.ai-tab.active {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: var(--shadow-card);
+}
+
+.ai-panel {
+  display: none;
+}
+
+.ai-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}

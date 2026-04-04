@@ -3,14 +3,15 @@
 ## 폴더 구조
 ```
 Delper/
-├── index.html              ← 메인 HTML (순수 콘텐츠만, ~650줄)
-├── delper-test.html        ← 원본 백업 (단일 파일 버전 2,816줄)
+├── index.html              ← 메인 HTML (~1,630줄, 10개 섹션)
+├── og-image.jpg            ← OG 소셜 공유 이미지 (1200x630)
+├── CLAUDE.md               ← Claude Code 프로젝트 가이드
 ├── css/
 │   ├── variables.css       ← 테마 변수 (5개 테마 색상 정의)
 │   ├── base.css            ← 리셋, 폰트, 스크롤바, 애니메이션, 인쇄 스타일
 │   ├── layout.css          ← 사이드바, 메인 레이아웃, 반응형
 │   ├── components.css      ← 카드, 뱃지, 아코디언, 체크리스트 등 재사용 컴포넌트
-│   └── sections.css        ← 섹션 특화 스타일 (PDCA, 퍼널, 가격표, 타임라인 등)
+│   └── sections.css        ← 섹션 특화 스타일 (PDCA, 퍼널, 가격표, AI 탭/패널 등)
 ├── js/
 │   ├── theme.js            ← 테마 전환 (localStorage 저장/복원)
 │   ├── navigation.js       ← 섹션 전환, 사이드바 토글
@@ -20,11 +21,11 @@ Delper/
 │   ├── command.js          ← Ctrl+K 커맨드 팔레트 (통합 검색)
 │   ├── techstack.js        ← 기술 스택 렌더링
 │   ├── industry.js         ← 산업분야 탭/렌더링/치트키
-│   └── app.js              ← 초기화 (모든 렌더링 호출 + 이벤트 바인딩)
+│   └── app.js              ← 초기화 + AI 탭 전환 + 키보드 이벤트 바인딩
 ├── data/
-│   ├── glossary-data.js    ← 용어집 150개+ 데이터 (GLOSSARY_DATA)
+│   ├── glossary-data.js    ← 용어집 150개 데이터 (GLOSSARY_DATA)
 │   ├── industry-data.js    ← 산업분야 5개 데이터 (INDUSTRY_DATA, PLANNED_INDUSTRIES)
-│   ├── tech-stack-data.js  ← 섹션 네비게이션 데이터 (SECTION_NAV_DATA, TECH_STACK_DATA)
+│   ├── tech-stack-data.js  ← 섹션 네비게이션 10개 + 기술 스택 검색 데이터 (SECTION_NAV_DATA, TECH_STACK_DATA)
 │   └── tech-render-data.js ← 기술 스택 카테고리 데이터 (TECH_CATEGORIES)
 └── docs/
     ├── PRD.md              ← 제품 요구사항 문서
@@ -34,7 +35,9 @@ Delper/
     ├── DECISIONS.md        ← 결정 사항 로그
     ├── CODING-RULES.md     ← 코딩 규칙
     ├── ROADMAP.md          ← 개발 예정 기능
-    └── TEST-PLAN.md        ← 테스트 계획
+    ├── TEST-PLAN.md        ← 테스트 계획
+    ├── NETWORKING-BASICS.md ← 네트워크/인프라 기초 지식 정리
+    └── AI-ASSISTANT.md     ← Add Delper AI 어시스턴트 기획
 ```
 
 ## 데이터 흐름
@@ -62,11 +65,11 @@ Delper/
 <script src="js/ui.js"></script>
 <script src="js/glossary.js"></script>
 <script src="js/command.js"></script>
+<script src="js/industry.js"></script>
 <script src="js/techstack.js"></script>
 <script src="js/bookmarks.js"></script>
-<script src="js/industry.js"></script>
 
-<!-- 3. 초기화 (모든 모듈에 의존) -->
+<!-- 3. 초기화 + AI 탭 + 키보드 이벤트 (모든 모듈에 의존) -->
 <script src="js/app.js"></script>
 ```
 

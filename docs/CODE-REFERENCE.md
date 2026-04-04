@@ -13,7 +13,7 @@ Array<{
   desc: string           // 설명 텍스트
 }>
 ```
-현재 150개+. 카테고리별 필터 + 검색 + 북마크 지원.
+현재 150개. 카테고리별 필터 + 검색 + 북마크 지원.
 
 ### INDUSTRY_DATA (industry-data.js)
 ```js
@@ -42,7 +42,7 @@ Array<string>  // 기술 이름 80개+ (커맨드 팔레트 검색용)
 
 ### SECTION_NAV_DATA (tech-stack-data.js)
 ```js
-Array<{name: string, id: string, icon: string}>  // 9개 섹션 네비
+Array<{name: string, id: string, icon: string}>  // 10개 섹션 네비 (AI & 자동화 포함)
 ```
 
 ### TECH_CATEGORIES (tech-render-data.js)
@@ -124,8 +124,11 @@ Array<{
 ### app.js
 | 함수 | 설명 |
 |------|------|
+| `showAiTab(tabId)` | AI & 자동화 섹션 탭 전환 (vibecoding / ai-usage / harness) |
 | `toggleHelp()` | F1 도움말 오버레이 토글 |
-| DOMContentLoaded | renderGlossary → updateBookmarkIcons → renderTechStack → initIndustry → 키보드 이벤트 |
+| 즉시 실행 | renderGlossary → updateBookmarkIcons/Count → renderTechStack → initIndustry |
+| keydown 리스너 | F1(도움말), Ctrl+K(팔레트), Esc(닫기) |
+| click 리스너 | cmdOverlay / helpOverlay 클릭 시 닫기 |
 
 ---
 
@@ -144,3 +147,6 @@ Array<{
 | `#sidebar` | 전역 | 사이드바 |
 | `#glossaryTotal` | 용어집 | 총 용어 수 표시 |
 | `#bookmarkCount` | 용어집 필터 | 즐겨찾기 수 표시 |
+| `#panel-vibecoding` | AI 섹션 | 바이브코딩 탭 패널 |
+| `#panel-ai-usage` | AI 섹션 | AI 활용 탭 패널 |
+| `#panel-harness` | AI 섹션 | 하네스 엔지니어링 탭 패널 |

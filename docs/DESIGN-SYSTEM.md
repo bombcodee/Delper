@@ -83,6 +83,14 @@ KPI 테이블. `.bench-good`(초록), `.bench-bad`(빨강), `.bench-tip`(개선 
 ### .cmd-overlay / .cmd-box (커맨드 팔레트)
 글래스모피즘 오버레이. `backdrop-filter: blur`.
 
+### .ai-tab (AI 탭 버튼)
+AI & 자동화 섹션의 탭 전환 버튼. `.active` 클래스로 현재 탭 표시.
+- 3개 탭: 바이브코딩, AI 활용, 하네스 엔지니어링
+
+### .ai-panel (AI 패널)
+탭에 대응하는 콘텐츠 패널. `.active`일 때만 `display: block`.
+- 각 패널: `#panel-vibecoding`, `#panel-ai-usage`, `#panel-harness`
+
 ## 폰트
 - 본문: **Noto Sans KR** (300, 400, 500, 700)
 - 코드: **JetBrains Mono** (400, 500)

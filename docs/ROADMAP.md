@@ -17,11 +17,13 @@
 - [x] 인쇄 스타일 (@media print)
 - [x] 카테고리별 용어 개수 표시
 - [x] 반응형 모바일 레이아웃
+- [x] GitHub Pages 배포 (bombcodee.github.io/Delper)
+- [x] OG 태그 소셜 공유 (이미지 + 타이틀 + 설명)
+- [x] AI & 자동화 섹션 (바이브코딩 / AI 활용 / 하네스 3탭)
 
 ## 진행 중
-- [x] GitHub Pages 배포 (레포명: Delper) ✔ 완료
-- [x] 폴더명 Delper2 → Delper 변경 ✔ 완료
 - [ ] 의사결정 트리 콘텐츠 줄바꿈 개선 (논의 중)
+- [ ] Add Delper AI 어시스턴트 기획 (docs/AI-ASSISTANT.md)
 
 ## 예정된 기능
 
@@ -29,7 +31,7 @@
 - [ ] 체크리스트 진행상태 localStorage 저장 (새로고침 후 유지)
 - [ ] 섹션 진행률 표시 (사이드바 메뉴 옆 완료율)
 - [ ] 주간 자동 최신화 시스템 구축 (아래 상세)
-- [ ] AI/바이브코딩 섹션 추가 (아래 상세)
+- [ ] Add Delper AI 어시스턴트 구현 (아래 상세, docs/AI-ASSISTANT.md 참고)
 
 ### 주간 자동 최신화 시스템
 > 매주 1회 자동으로 Delper 콘텐츠를 최신 상태로 유지하는 파이프라인
@@ -48,25 +50,20 @@
 - PR 자동 생성 → 사람이 리뷰 후 머지 (완전 자동 배포는 위험)
 - 깨진 링크 체커 (모든 외부 URL을 주기적으로 검증)
 
-### AI / 바이브코딩 콘텐츠
-> 1인 개발자에게 필수가 된 AI 활용 가이드
+### AI / 바이브코딩 콘텐츠 — 완료
+> AI & 자동화 섹션으로 구현 완료 (3탭: 바이브코딩, AI 활용, 하네스 엔지니어링)
 
-**용어집 추가 예정:**
-- [ ] Vibe Coding — AI와 대화하며 코드를 생성하는 개발 방식
-- [ ] AI Agent — 자율적으로 작업을 수행하는 AI 시스템
-- [ ] MCP (Model Context Protocol) — AI 도구 연동 프로토콜
-- [ ] Prompt Engineering — AI에게 효과적으로 지시하는 기법
-- [ ] RAG (Retrieval-Augmented Generation) — 외부 지식 기반 AI 응답
-- [ ] AI Pair Programming — AI와 함께하는 페어 프로그래밍
-- [ ] LLM (Large Language Model) — 대규모 언어 모델
-- [ ] Fine-tuning — 특정 목적에 맞게 AI 모델 조정
-- [ ] AI Code Review — AI를 활용한 코드 리뷰 자동화
+**용어집 추가 (완료):**
+- [x] 바이브코딩, AI Agent, MCP, Prompt Engineering, RAG 등 AI 관련 용어 용어집 반영
+- [x] AI & 자동화 섹션에 도구별 가이드, 워크플로우, 실전 팁 포함
 
-**새 섹션 또는 기존 섹션 확장:**
-- [ ] AI 활용 개발 워크플로우 (아이디어 → 설계 → 코딩 → 테스트 각 단계에서 AI 활용법)
-- [ ] 바이브코딩 실전 가이드 (Claude Code, Cursor, Copilot 등 도구별 활용법)
-- [ ] AI 시대의 1인 개발자 전략 (AI로 생산성 10배 높이는 방법)
-- [ ] 추천 AI 도구 리소스 (Claude, ChatGPT, Cursor, v0, Bolt 등)
+### Add Delper AI 어시스턴트
+> 사이트 내 대화형 AI 콘텐츠 관리 시스템 (상세: docs/AI-ASSISTANT.md)
+
+- [ ] Phase 1: 채팅 패널 UI (Ctrl+J, 플로팅, 투명도, 최소화)
+- [ ] Phase 2: Cloudflare Worker + Claude API (Haiku) 연동
+- [ ] Phase 3: GitHub API 연동 (PR 자동 생성)
+- [ ] Phase 4: 고도화 (주간 자동 최신화, 깨진 링크 감지)
 
 ### 우선순위 보통
 - [ ] 다크모드 전환 애니메이션 (부드러운 전환)

@@ -15,6 +15,8 @@
 - [코딩 규칙](docs/CODING-RULES.md) - CSS/JS/HTML/커밋 규칙
 - [로드맵](docs/ROADMAP.md) - 완료/진행중/예정 기능
 - [테스트 계획](docs/TEST-PLAN.md) - 수동 테스트 체크리스트
+- [AI 어시스턴트](docs/AI-ASSISTANT.md) - Add Delper AI 기획
+- [네트워크 기초](docs/NETWORKING-BASICS.md) - 네트워크/인프라 지식 정리
 
 ## 핵심 규칙
 - CSS 색상은 반드시 `var(--...)` 사용 (하드코딩 금지)

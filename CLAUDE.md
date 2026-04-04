@@ -25,6 +25,8 @@
 - ES Modules 사용하지 않음 (file:// 호환)
 - 충돌 없는 작업은 병렬 에이전트로 진행
 - 사용자와 논의 후 승인받고 진행하는 패턴 유지
+- **커밋/푸시는 반드시 사용자 승인 후 실행**
+- **커밋 시 변경사항과 관련된 docs/ 문서를 자동으로 확인하고 최신화할 것** (ARCHITECTURE, CODE-REFERENCE, DESIGN-SYSTEM, ROADMAP, TEST-PLAN, DECISIONS 등)
 
 ## 빠른 수정 가이드
 | 작업 | 파일 |

@@ -64,7 +64,7 @@ AI: "적용했습니다. PR 생성됨"
   → 터미널 앞에 있을 때
 
 [C] 사이트 UI (Add Delper)
-  → Cloudflare Worker → Claude API (Haiku) → GitHub API → PR 생성
+  → Vercel Serverless → Claude API (Haiku) → GitHub API → PR 생성
   → 어디서든 가능
 ```
 
@@ -72,17 +72,17 @@ AI: "적용했습니다. PR 생성됨"
 ```
 사용자 입력
     ↓
-Cloudflare Worker (API 키 안전 보관)
-    ↓
-Claude API (Haiku) — 시스템 프롬프트에 Delper 구조 포함
+Vercel Serverless Function (API 키 안전 보관)
+    ├── api/chat.js → Claude API (Haiku) — 시스템 프롬프트에 Delper 구조 포함
+    └── api/github.js → GitHub API — PR 생성/머지/상태 조회
     ↓
 분류 + 제안 응답
     ↓
-사용자 확인
+사용자 확인 (채팅 내 버튼)
     ↓
-GitHub API — PR 자동 생성
+GitHub API — PR 자동 생성/머지
     ↓
-사용자 머지 → GitHub Pages 자동 배포
+Vercel 자동 배포
 ```
 
 ### 시스템 프롬프트 핵심
@@ -108,49 +108,65 @@ GitHub API — PR 자동 생성
 
 ## 필요한 준비물
 
-| 항목 | 용도 | 비용 |
-|------|------|------|
-| Cloudflare 계정 | Worker 배포 | 무료 |
-| Claude API 키 | AI 분류/대화 | 월 ~$1-2 |
-| GitHub Personal Access Token | PR 자동 생성 | 무료 |
+| 항목 | 용도 | 비용 | 상태 |
+|------|------|------|------|
+| Vercel 계정 | 사이트 + Serverless 배포 | 무료 | 완료 |
+| Claude API 키 | AI 분류/대화 | 월 ~$1-2 | 완료 |
+| GitHub Personal Access Token | PR 자동 생성 | 무료 | 완료 |
 
 ---
 
 ## 구현 단계
 
-### Phase 1: UI (API 없이)
-- [ ] 사이드바에 Add Delper 버튼 추가
-- [ ] 채팅 패널 UI (플로팅, 투명도, 높이조절, 최소화)
-- [ ] Ctrl+J 단축키 바인딩
-- [ ] 메시지 입력/표시 기본 구조
-- [ ] 테마 대응 (5개 테마 전부)
+### Phase 1: UI ✅ 완료
+- [x] 우측 하단 플로팅 버튼 (항상 표시, 열림 시 색상 변경)
+- [x] 채팅 패널 UI (플로팅, 투명도, 높이조절, 최소화)
+- [x] Ctrl+J 단축키 바인딩
+- [x] 헤더 드래그로 자유 이동
+- [x] 버튼 ↔ 패널 간 애니메이션 (위치/크기 기억)
+- [x] 테마 대응 (5개 테마 전부)
 
-### Phase 2: AI 연동
-- [ ] Cloudflare Worker 생성
-- [ ] Claude API (Haiku) 연동
-- [ ] 시스템 프롬프트 설계 + 튜닝
-- [ ] 분류 결과 카드 UI
-- [ ] 대화 컨텍스트 유지
+### Phase 2: AI 연동 ✅ 완료
+- [x] Vercel Serverless Function (api/chat.js) — Cloudflare에서 전환 (403 이슈)
+- [x] Claude API (Haiku 3) 연동
+- [x] 시스템 프롬프트 설계 (Delper 구조 포함)
+- [x] 대화 컨텍스트 유지 (history 배열)
 
-### Phase 3: GitHub 연동
-- [ ] GitHub API 연동 (Worker에서)
-- [ ] PR 자동 생성 로직
-- [ ] data/ 파일 수정 로직
-- [ ] 성공/실패 알림 UI
+### Phase 2.5: AI 품질 개선 (예정)
+- [ ] 시스템 프롬프트 보강 (분류 정확도, 환각 방지)
+- [ ] 모델 선택 옵션 (Haiku → Sonnet 전환 가능하게) — Tier 2 필요 ($40+결제 + 7일)
+- [ ] 분류 결과를 구조화된 카드 UI로 표시
+- [x] API 코드를 프로젝트 내 api/ 폴더로 관리 (Vercel Serverless)
 
-### Phase 4: 고도화
-- [ ] 주간 자동 최신화 연결 (같은 Worker 재사용)
+### Phase 3: GitHub 연동 — 코드 완료 (테스트 대기)
+- [x] GitHub Personal Access Token 발급 + Vercel 환경변수 등록
+- [x] GitHub API 연동 (api/github.js — Vercel Serverless)
+- [x] PR 자동 생성 로직 (create action)
+- [x] PR 머지 로직 (merge action)
+- [x] PR 상태 조회 (status action)
+- [x] 채팅 내 머지 버튼 (GitHub 방문 불필요)
+- [ ] 실제 환경 테스트 (PR 생성 → 머지 플로우 검증)
+
+### Phase 4: 고도화 (예정)
+- [ ] 주간 자동 최신화 연결 (같은 Vercel Function 재사용)
 - [ ] 깨진 링크 자동 감지
 - [ ] 추가 이력 관리
 - [ ] URL 입력 시 자동 제목/설명 추출
 
 ---
 
+## 인프라 변경 이력
+
+| 날짜 | 변경 | 이유 |
+|------|------|------|
+| 2026-04-05 | Cloudflare Workers → Vercel Serverless | Claude API가 Cloudflare IP 대역 차단 (403 forbidden) |
+
 ## 월 운영 비용 예측
 
 | 항목 | 비용 |
 |------|------|
-| Cloudflare Workers | 무료 (일 10만 요청) |
+| Vercel (사이트 + Serverless) | 무료 (Hobby 플랜) |
 | Claude API (Haiku) | ~$1-2 (일 10건 기준) |
+| Claude API (Sonnet, 향후) | ~$5-10 (일 10건 기준) |
 | GitHub API | 무료 |
-| **총합** | **월 $1-2** |
+| **총합** | **월 $1-2 (현재) / $5-10 (Sonnet 전환 시)** |

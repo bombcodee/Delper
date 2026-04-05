@@ -54,7 +54,19 @@
 
 ### Delper 기능 방향: Add Delper AI 어시스턴트
 - **결정**: 사이트 내 대화형 AI를 통해 콘텐츠를 추가/관리하는 방향
-- **이유**: 현재 Claude Code 터미널에서 수동으로 하는 콘텐츠 추가 작업을 사이트 UI로 옮기면, 어디서든 빠르게 콘텐츠 관리 가능. Cloudflare Worker + Claude Haiku + GitHub API 조합으로 월 $1-2 비용. 상세 기획은 docs/AI-ASSISTANT.md.
+- **이유**: 현재 Claude Code 터미널에서 수동으로 하는 콘텐츠 추가 작업을 사이트 UI로 옮기면, 어디서든 빠르게 콘텐츠 관리 가능. Vercel Serverless + Claude Haiku + GitHub API 조합으로 월 $1-2 비용. 상세 기획은 docs/AI-ASSISTANT.md.
+
+### Cloudflare Workers → Vercel Serverless 전환
+- **결정**: API 백엔드를 Cloudflare Workers에서 Vercel Serverless Functions로 전환
+- **이유**: Claude API가 Cloudflare Workers IP 대역을 차단 (403 forbidden). Vercel에서는 정상 동작. 사이트와 API를 단일 플랫폼(Vercel)으로 통합하여 관리 복잡도 감소.
+
+### PR 머지를 채팅 내 버튼으로 처리
+- **결정**: GitHub 사이트 방문 없이 Add Delper 채팅 내 버튼으로 PR 머지
+- **이유**: 콘텐츠 추가 워크플로우를 사이트 내에서 완결하기 위함. 사용자가 GitHub에 별도로 이동하지 않아도 PR 생성 → 확인 → 머지까지 가능.
+
+### 채팅 버블 내 액션 버튼 (add/edit)
+- **결정**: 고정된 입력 영역이 아닌, AI 응답 버블 안에 "PR에 추가" / "머지" 등 액션 버튼 배치
+- **이유**: 대화 흐름에 자연스럽게 액션을 삽입. AI 응답에 따라 다른 버튼 조합을 동적으로 제공할 수 있어 유연함.
 
 ## 네이밍 결정
 

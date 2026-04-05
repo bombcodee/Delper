@@ -4,7 +4,7 @@
 - **이름**: Delper (Develop + Helper) - The All-in-One Dev Guide
 - **타입**: 정적 HTML/CSS/JS 웹 가이드 (프레임워크 없음)
 - **대상**: 1인 개발자
-- **배포**: GitHub Pages
+- **배포**: Vercel (https://delper.vercel.app) + GitHub Pages (레거시)
 
 ## 문서
 - [PRD](docs/PRD.md) - 제품 요구사항
@@ -37,3 +37,7 @@
 | 테마 색상 변경 | `css/variables.css` |
 | 컴포넌트 스타일 | `css/components.css` |
 | 섹션 스타일 | `css/sections.css` |
+| Add Delper UI/AI/GitHub | `js/add-delper.js` |
+| AI API 프록시 | `api/chat.js` |
+| GitHub PR API | `api/github.js` |
+| Vercel 설정 | `vercel.json` |

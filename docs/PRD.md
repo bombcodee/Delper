@@ -6,7 +6,7 @@
 - **대상**: 1인 개발자 (기획~운영까지 혼자 하는 사람)
 - **목적**: 개발 프로세스 전반의 용어, 전략, 기술, 운영 지식을 한 곳에 정리한 올인원 가이드
 - **슬로건**: The All-in-One Dev Guide
-- **배포**: GitHub Pages (`https://bombcodee.github.io/Delper/`)
+- **배포**: Vercel (`https://delper.vercel.app`) — 주 배포, GitHub Pages (레거시)
 
 ## 핵심 가치
 1. **한 곳에서 전부**: 기획→개발→출시→운영 전 과정 커버
@@ -40,6 +40,7 @@
 - **인쇄 스타일**: @media print 지원
 - **반응형**: 모바일 사이드바 (햄버거 메뉴)
 - **AI & 자동화 섹션**: 바이브코딩 가이드, AI 활용 워크플로우, 하네스 엔지니어링 (3탭 구성)
+- **Add Delper AI 어시스턴트**: 사이트 내 대화형 AI 콘텐츠 관리 (Ctrl+J, 플로팅 패널, 드래그, 투명도, PR 생성/머지)
 - **OG 태그**: 소셜 미디어 공유 시 이미지/제목/설명 표시
 
 ## 기술 스택
@@ -47,4 +48,12 @@
 - CSS3 (커스텀 프로퍼티, 그리드, 플렉스)
 - Vanilla JS (프레임워크 없음, 글로벌 함수)
 - Google Fonts (Noto Sans KR, JetBrains Mono)
-- GitHub Pages (배포)
+- Vercel (배포 + Serverless Functions)
+- Claude API (Haiku 3) — Add Delper AI 대화
+- GitHub API — PR 자동 생성/머지
+
+## API 엔드포인트 (Vercel Serverless)
+| 경로 | 메서드 | 설명 |
+|------|--------|------|
+| `/api/chat` | POST | Claude API 프록시 (AI 대화) |
+| `/api/github` | POST | GitHub PR 생성/머지/상태 조회 |

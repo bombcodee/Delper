@@ -5,13 +5,17 @@
 Delper/
 ├── index.html              ← 메인 HTML (~1,630줄, 10개 섹션)
 ├── og-image.jpg            ← OG 소셜 공유 이미지 (1200x630)
+├── vercel.json             ← Vercel 배포 설정 (라우팅, 헤더)
 ├── CLAUDE.md               ← Claude Code 프로젝트 가이드
+├── api/                    ← Vercel Serverless Functions
+│   ├── chat.js             ← Claude API 프록시 (Phase 2 AI 연동)
+│   └── github.js           ← GitHub PR 생성/머지/상태 API (Phase 3)
 ├── css/
 │   ├── variables.css       ← 테마 변수 (5개 테마 색상 정의)
 │   ├── base.css            ← 리셋, 폰트, 스크롤바, 애니메이션, 인쇄 스타일
 │   ├── layout.css          ← 사이드바, 메인 레이아웃, 반응형
 │   ├── components.css      ← 카드, 뱃지, 아코디언, 체크리스트 등 재사용 컴포넌트
-│   └── sections.css        ← 섹션 특화 스타일 (PDCA, 퍼널, 가격표, AI 탭/패널 등)
+│   └── sections.css        ← 섹션 특화 스타일 (PDCA, 퍼널, 가격표, AI 탭/패널, Add Delper 등)
 ├── js/
 │   ├── theme.js            ← 테마 전환 (localStorage 저장/복원)
 │   ├── navigation.js       ← 섹션 전환, 사이드바 토글
@@ -21,7 +25,8 @@ Delper/
 │   ├── command.js          ← Ctrl+K 커맨드 팔레트 (통합 검색)
 │   ├── techstack.js        ← 기술 스택 렌더링
 │   ├── industry.js         ← 산업분야 탭/렌더링/치트키
-│   └── app.js              ← 초기화 + AI 탭 전환 + 키보드 이벤트 바인딩
+│   ├── app.js              ← 초기화 + AI 탭 전환 + 키보드 이벤트 바인딩
+│   └── add-delper.js       ← Add Delper UI + AI 채팅 + GitHub PR 연동
 ├── data/
 │   ├── glossary-data.js    ← 용어집 150개 데이터 (GLOSSARY_DATA)
 │   ├── industry-data.js    ← 산업분야 5개 데이터 (INDUSTRY_DATA, PLANNED_INDUSTRIES)
@@ -41,6 +46,8 @@ Delper/
 ```
 
 ## 데이터 흐름
+
+### 정적 콘텐츠 렌더링
 ```
 [data/*.js]  →  글로벌 상수 정의 (GLOSSARY_DATA, INDUSTRY_DATA 등)
      ↓
@@ -49,6 +56,17 @@ Delper/
 [js/glossary.js, js/techstack.js, js/industry.js]  →  데이터를 읽어 DOM 생성
      ↓
 [index.html]  →  #glossaryList, #techStackList, #indContent 등에 삽입
+```
+
+### Add Delper AI 흐름 (Phase 2-3)
+```
+[js/add-delper.js]  →  사용자 채팅 입력
+     ↓
+[api/chat.js]  →  Vercel Serverless → Claude API (Haiku) → AI 응답 반환
+     ↓
+[js/add-delper.js]  →  응답 렌더링 + 버튼(PR 추가/머지) 표시
+     ↓
+[api/github.js]  →  Vercel Serverless → GitHub API → PR 생성/머지/상태 조회
 ```
 
 ## 스크립트 로드 순서 (의존성 순)
@@ -71,7 +89,28 @@ Delper/
 
 <!-- 3. 초기화 + AI 탭 + 키보드 이벤트 (모든 모듈에 의존) -->
 <script src="js/app.js"></script>
+
+<!-- 4. Add Delper (독립 모듈, DOM 로드 후 실행) -->
+<script src="js/add-delper.js"></script>
 ```
+
+## 배포 아키텍처
+
+### Vercel (주 배포) — https://delper.vercel.app
+```
+Vercel
+├── 정적 파일 서빙 (index.html, css/, js/, data/)
+├── api/chat.js    → Serverless Function (Claude API 프록시)
+└── api/github.js  → Serverless Function (GitHub PR API)
+
+환경변수 (Vercel Dashboard):
+- ANTHROPIC_API_KEY  → Claude API 인증
+- GITHUB_TOKEN       → GitHub Personal Access Token
+```
+
+### GitHub Pages (레거시) — bombcodee.github.io/Delper
+- 정적 파일만 서빙 (API 없음)
+- Add Delper AI 기능 사용 불가
 
 ## 상태 관리
 - **테마**: `localStorage('delper-theme')` → `data-theme` 속성

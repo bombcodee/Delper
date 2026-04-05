@@ -20,10 +20,14 @@
 - [x] GitHub Pages 배포 (bombcodee.github.io/Delper)
 - [x] OG 태그 소셜 공유 (이미지 + 타이틀 + 설명)
 - [x] AI & 자동화 섹션 (바이브코딩 / AI 활용 / 하네스 3탭)
+- [x] Add Delper Phase 1: UI (플로팅 패널, 드래그, 리사이즈, 투명도, Ctrl+J, 애니메이션)
+- [x] Add Delper Phase 2: AI 연동 (Vercel Serverless + Claude API Haiku)
+- [x] Add Delper Phase 3: GitHub PR API 코드 완료 (api/github.js — 생성/머지/상태)
+- [x] Vercel 배포 전환 (사이트 + API 단일 플랫폼, https://delper.vercel.app)
 
 ## 진행 중
 - [ ] 의사결정 트리 콘텐츠 줄바꿈 개선 (논의 중)
-- [ ] Add Delper AI 어시스턴트 기획 (docs/AI-ASSISTANT.md)
+- [ ] Add Delper Phase 3: GitHub PR 기능 테스트 (코드 완료, 실제 테스트 대기)
 
 ## 예정된 기능
 
@@ -60,10 +64,17 @@
 ### Add Delper AI 어시스턴트
 > 사이트 내 대화형 AI 콘텐츠 관리 시스템 (상세: docs/AI-ASSISTANT.md)
 
-- [ ] Phase 1: 채팅 패널 UI (Ctrl+J, 플로팅, 투명도, 최소화)
-- [ ] Phase 2: Cloudflare Worker + Claude API (Haiku) 연동
-- [ ] Phase 3: GitHub API 연동 (PR 자동 생성)
+- [x] Phase 1: 채팅 패널 UI (Ctrl+J, 플로팅, 드래그, 투명도, 리사이즈, 최소화)
+- [x] Phase 2: Vercel Serverless + Claude API (Haiku) 연동
+- [x] Phase 3: GitHub PR API 코드 완료 (api/github.js — 테스트 대기)
+- [ ] Phase 2.5: AI 품질 개선 (시스템 프롬프트 보강, 모델 선택 옵션, 카드 UI)
 - [ ] Phase 4: 고도화 (주간 자동 최신화, 깨진 링크 감지)
+
+### 인프라 변경 이력
+| 날짜 | 변경 | 이유 |
+|------|------|------|
+| 2026-04-05 | Cloudflare Workers → Vercel Serverless | Claude API가 Cloudflare IP 대역 차단 (403 forbidden) |
+| 2026-04-05 | GitHub Pages → Vercel 주 배포 | 사이트 + API를 단일 플랫폼에서 관리 |
 
 ### 우선순위 보통
 - [ ] 다크모드 전환 애니메이션 (부드러운 전환)

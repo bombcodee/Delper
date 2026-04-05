@@ -3,6 +3,7 @@
 ## 파일 구조 원칙
 - **한 파일 = 한 책임**: CSS, JS, 데이터 절대 섞지 않음
 - **데이터와 로직 분리**: 콘텐츠 데이터는 `data/`, 렌더링 로직은 `js/`
+- **API는 `api/` 폴더**: Vercel Serverless Functions (Node.js, export default handler)
 - **인라인 스타일 최소화**: 필요한 경우에만 (퍼널 max-width 등 동적 값)
 - **인라인 스크립트 금지**: 모든 JS는 외부 파일로
 

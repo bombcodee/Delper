@@ -130,6 +130,37 @@ Array<{
 | keydown 리스너 | F1(도움말), Ctrl+K(팔레트), Esc(닫기) |
 | click 리스너 | cmdOverlay / helpOverlay 클릭 시 닫기 |
 
+### add-delper.js
+| 함수 | 설명 |
+|------|------|
+| `toggleAddDelper()` | Add Delper 패널 열기/닫기 토글 |
+| `openAddDelper()` | 패널 열기 (애니메이션 포함) |
+| `closeAddDelper()` | 패널 닫기 (애니메이션 포함) |
+| `minimizeAddDelper()` | 패널 최소화 → 플로팅 버튼으로 축소 |
+| `setAdpOpacity(value)` | 패널 투명도 설정 (슬라이더 연동) |
+| `sendAdpMessage()` | 사용자 메시지를 api/chat.js로 전송, AI 응답 렌더링 |
+| `checkAdpPending()` | 대기 중인 PR 상태 확인 (pending bar 표시) |
+| `addToAdpPR()` | AI 제안을 GitHub PR로 생성 (api/github.js 호출) |
+| `mergeAdpPR()` | 생성된 PR 머지 (api/github.js 호출) |
+| `formatReply(text)` | AI 응답 텍스트를 HTML로 포맷팅 |
+| `escapeHtml(str)` | HTML 특수문자 이스케이프 (XSS 방지) |
+
+---
+
+## Vercel Serverless Functions (api/ 폴더)
+
+### api/chat.js
+Claude API 프록시. 클라이언트에서 API 키 노출 없이 AI 대화 가능.
+- **요청**: POST, body에 messages 배열
+- **응답**: Claude Haiku 3 응답 텍스트
+- **환경변수**: `ANTHROPIC_API_KEY`
+
+### api/github.js
+GitHub PR 생성/머지/상태 조회 API.
+- **요청**: POST, body에 action (create/merge/status) + 관련 데이터
+- **응답**: PR URL, 상태, 머지 결과
+- **환경변수**: `GITHUB_TOKEN`
+
 ---
 
 ## 주요 DOM ID
@@ -150,3 +181,8 @@ Array<{
 | `#panel-vibecoding` | AI 섹션 | 바이브코딩 탭 패널 |
 | `#panel-ai-usage` | AI 섹션 | AI 활용 탭 패널 |
 | `#panel-harness` | AI 섹션 | 하네스 엔지니어링 탭 패널 |
+| `#adp-panel` | Add Delper | 메인 채팅 패널 |
+| `#adp-btn` | Add Delper | 플로팅 열기 버튼 |
+| `#adp-messages` | Add Delper | 채팅 메시지 영역 |
+| `#adp-input` | Add Delper | 메시지 입력 필드 |
+| `#adp-pending` | Add Delper | PR 대기 상태 바 |

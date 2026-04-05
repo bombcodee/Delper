@@ -147,7 +147,13 @@ function setAdpOpacity(value) {
   document.getElementById('adpPanel').style.opacity = value / 100;
 }
 
-// Send message (placeholder)
+// Worker URL
+var ADP_WORKER_URL = 'https://delper-api.artipect123.workers.dev';
+
+// Conversation history for context
+var adpHistory = [];
+
+// Send message to Worker → Claude API
 function sendAdpMessage() {
   var input = document.getElementById('adpInput');
   var text = input.value.trim();
@@ -155,6 +161,7 @@ function sendAdpMessage() {
 
   var messages = document.getElementById('adpMessages');
 
+  // Show user message
   var userMsg = document.createElement('div');
   userMsg.className = 'adp-msg adp-msg-user';
   userMsg.innerHTML = '<div class="adp-msg-bubble">' + escapeHtml(text) + '</div>';
@@ -162,13 +169,59 @@ function sendAdpMessage() {
   input.value = '';
   messages.scrollTop = messages.scrollHeight;
 
-  setTimeout(function() {
+  // Add to history
+  adpHistory.push({ role: 'user', content: text });
+
+  // Show loading
+  var loadingMsg = document.createElement('div');
+  loadingMsg.className = 'adp-msg adp-msg-ai';
+  loadingMsg.id = 'adp-loading';
+  loadingMsg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--tx-3)">분석 중...</div>';
+  messages.appendChild(loadingMsg);
+  messages.scrollTop = messages.scrollHeight;
+
+  // Call Worker
+  fetch(ADP_WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: text, history: adpHistory })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    // Remove loading
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+
+    var reply = data.reply || data.error || '응답을 받지 못했습니다.';
+
+    // Add AI response
     var aiMsg = document.createElement('div');
     aiMsg.className = 'adp-msg adp-msg-ai';
-    aiMsg.innerHTML = '<div class="adp-msg-bubble">AI 연동 준비 중입니다. Phase 2에서 Cloudflare Worker + Claude API가 연결되면 자동 분류 및 콘텐츠 추가가 가능해집니다.<br><br>입력하신 내용: <strong>' + escapeHtml(text) + '</strong></div>';
+    aiMsg.innerHTML = '<div class="adp-msg-bubble">' + formatReply(reply) + '</div>';
     messages.appendChild(aiMsg);
     messages.scrollTop = messages.scrollHeight;
-  }, 500);
+
+    // Add to history
+    adpHistory.push({ role: 'assistant', content: reply });
+  })
+  .catch(function(err) {
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+
+    var aiMsg = document.createElement('div');
+    aiMsg.className = 'adp-msg adp-msg-ai';
+    aiMsg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--red)">연결 오류: ' + escapeHtml(err.message) + '</div>';
+    messages.appendChild(aiMsg);
+    messages.scrollTop = messages.scrollHeight;
+  });
+}
+
+// Format AI reply (basic markdown-like)
+function formatReply(text) {
+  return escapeHtml(text)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.*?)`/g, '<code style="background:var(--bg-3);padding:1px 4px;border-radius:3px">$1</code>')
+    .replace(/\n/g, '<br>');
 }
 
 function escapeHtml(str) {

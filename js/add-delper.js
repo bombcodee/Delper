@@ -149,6 +149,8 @@ function setAdpOpacity(value) {
 
 // Worker URL
 var ADP_WORKER_URL = 'https://delper.vercel.app/api/chat';
+var ADP_GITHUB_URL = 'https://delper.vercel.app/api/github';
+var adpPendingPR = null; // { pr_number, itemCount }
 
 // Conversation history for context
 var adpHistory = [];
@@ -188,21 +190,21 @@ function sendAdpMessage() {
   })
   .then(function(res) { return res.json(); })
   .then(function(data) {
-    // Remove loading
     var loading = document.getElementById('adp-loading');
     if (loading) loading.remove();
 
     var reply = data.reply || data.error || '응답을 받지 못했습니다.';
 
-    // Add AI response
     var aiMsg = document.createElement('div');
     aiMsg.className = 'adp-msg adp-msg-ai';
     aiMsg.innerHTML = '<div class="adp-msg-bubble">' + formatReply(reply) + '</div>';
     messages.appendChild(aiMsg);
     messages.scrollTop = messages.scrollHeight;
 
-    // Add to history
     adpHistory.push({ role: 'assistant', content: reply });
+
+    // Update pending status
+    checkAdpPending();
   })
   .catch(function(err) {
     var loading = document.getElementById('adp-loading');
@@ -229,6 +231,138 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
+
+// Check pending PR status
+function checkAdpPending() {
+  fetch(ADP_GITHUB_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'status' })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var bar = document.getElementById('adpPendingBar');
+    if (data.hasPending) {
+      adpPendingPR = { pr_number: data.pr_number, itemCount: data.itemCount };
+      if (bar) {
+        bar.style.display = 'block';
+        bar.innerHTML = '<div class="adp-pending-info">' +
+          '<span>📋 대기 중: ' + data.itemCount + '건</span>' +
+          '<div class="adp-pending-btns">' +
+          '<button class="adp-merge-btn" onclick="mergeAdpPR()">머지하기 (' + data.itemCount + '건 반영)</button>' +
+          '</div></div>';
+      }
+    } else {
+      adpPendingPR = null;
+      if (bar) bar.style.display = 'none';
+    }
+  })
+  .catch(function() {});
+}
+
+// Add content to PR
+function addToAdpPR(type, entry, file, description) {
+  var messages = document.getElementById('adpMessages');
+
+  var loadingMsg = document.createElement('div');
+  loadingMsg.className = 'adp-msg adp-msg-ai';
+  loadingMsg.id = 'adp-loading';
+  loadingMsg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--tx-3)">PR에 추가 중...</div>';
+  messages.appendChild(loadingMsg);
+  messages.scrollTop = messages.scrollHeight;
+
+  fetch(ADP_GITHUB_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'add',
+      data: { type: type, entry: entry, file: file, description: description }
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+
+    var msg = document.createElement('div');
+    msg.className = 'adp-msg adp-msg-ai';
+    if (data.success) {
+      msg.innerHTML = '<div class="adp-msg-bubble">✅ ' + formatReply(data.message) + '</div>';
+    } else {
+      msg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--red)">❌ ' + formatReply(data.error || '오류 발생') + '</div>';
+    }
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+
+    checkAdpPending();
+  })
+  .catch(function(err) {
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+
+    var msg = document.createElement('div');
+    msg.className = 'adp-msg adp-msg-ai';
+    msg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--red)">연결 오류: ' + escapeHtml(err.message) + '</div>';
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+  });
+}
+
+// Merge PR
+function mergeAdpPR() {
+  if (!adpPendingPR) return;
+
+  var messages = document.getElementById('adpMessages');
+  var msg = document.createElement('div');
+  msg.className = 'adp-msg adp-msg-ai';
+  msg.id = 'adp-loading';
+  msg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--tx-3)">머지 중...</div>';
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+
+  fetch(ADP_GITHUB_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'merge',
+      data: { pr_number: adpPendingPR.pr_number }
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+
+    var resultMsg = document.createElement('div');
+    resultMsg.className = 'adp-msg adp-msg-ai';
+    if (data.success) {
+      resultMsg.innerHTML = '<div class="adp-msg-bubble">🎉 ' + formatReply(data.message) + '</div>';
+    } else {
+      resultMsg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--red)">❌ ' + formatReply(data.error || '머지 실패') + '</div>';
+    }
+    messages.appendChild(resultMsg);
+    messages.scrollTop = messages.scrollHeight;
+
+    adpPendingPR = null;
+    checkAdpPending();
+  })
+  .catch(function(err) {
+    var loading = document.getElementById('adp-loading');
+    if (loading) loading.remove();
+    var errMsg = document.createElement('div');
+    errMsg.className = 'adp-msg adp-msg-ai';
+    errMsg.innerHTML = '<div class="adp-msg-bubble" style="color:var(--red)">연결 오류: ' + escapeHtml(err.message) + '</div>';
+    messages.appendChild(errMsg);
+    messages.scrollTop = messages.scrollHeight;
+  });
+}
+
+// Check pending on panel open
+var origOpenAddDelper = openAddDelper;
+openAddDelper = function() {
+  origOpenAddDelper();
+  setTimeout(checkAdpPending, 500);
+};
 
 // ===== Drag to move =====
 (function() {

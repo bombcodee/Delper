@@ -1674,6 +1674,44 @@
   box-shadow: 0 6px 24px rgba(139, 92, 246, 0.3);
 }
 
+/* Pending bar */
+.adp-pending-bar {
+  padding: 10px 16px;
+  background: var(--purple-bg);
+  border-top: 1px solid var(--purple);
+  flex-shrink: 0;
+}
+
+.adp-pending-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--tx-1);
+}
+
+.adp-pending-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.adp-merge-btn {
+  padding: 6px 14px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: all var(--ts);
+}
+
+.adp-merge-btn:hover {
+  filter: brightness(1.15);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .adp-panel {

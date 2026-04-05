@@ -148,7 +148,7 @@ function setAdpOpacity(value) {
 }
 
 // Worker URL
-var ADP_WORKER_URL = 'https://delper-api.artipect123.workers.dev';
+var ADP_WORKER_URL = 'https://delper.vercel.app/api/chat';
 
 // Conversation history for context
 var adpHistory = [];

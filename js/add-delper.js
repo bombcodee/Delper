@@ -195,15 +195,31 @@ function sendAdpMessage() {
 
     var reply = data.reply || data.error || '응답을 받지 못했습니다.';
 
+    // Parse ADD_DATA tags
+    var addDataItems = [];
+    var cleanReply = reply.replace(/<!--ADD_DATA:(.*?)-->/g, function(match, json) {
+      try {
+        addDataItems.push(JSON.parse(json));
+      } catch(e) {}
+      return '';
+    }).trim();
+
+    // Build message HTML
+    var bubbleHtml = formatReply(cleanReply);
+
+    // Add structured cards for each ADD_DATA item
+    for (var i = 0; i < addDataItems.length; i++) {
+      var item = addDataItems[i];
+      bubbleHtml += buildAddCard(item, i);
+    }
+
     var aiMsg = document.createElement('div');
     aiMsg.className = 'adp-msg adp-msg-ai';
-    aiMsg.innerHTML = '<div class="adp-msg-bubble">' + formatReply(reply) + '</div>';
+    aiMsg.innerHTML = '<div class="adp-msg-bubble">' + bubbleHtml + '</div>';
     messages.appendChild(aiMsg);
     messages.scrollTop = messages.scrollHeight;
 
     adpHistory.push({ role: 'assistant', content: reply });
-
-    // Update pending status
     checkAdpPending();
   })
   .catch(function(err) {
@@ -224,6 +240,71 @@ function formatReply(text) {
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
     .replace(/`(.*?)`/g, '<code style="background:var(--bg-3);padding:1px 4px;border-radius:3px">$1</code>')
     .replace(/\n/g, '<br>');
+}
+
+// Build a card for an ADD_DATA item with action buttons
+function buildAddCard(item, index) {
+  var typeLabels = { glossary: '📖 용어집', resource: '📎 리소스', techstack: '⚙️ 기술스택' };
+  var label = typeLabels[item.type] || item.type;
+
+  var cardHtml = '<div class="adp-add-card" style="margin-top:10px;padding:10px 12px;background:var(--bg-2);border:1px solid var(--bd);border-radius:8px">';
+  cardHtml += '<div style="font-size:0.8rem;font-weight:600;color:var(--purple);margin-bottom:6px">' + label + ' 추가 제안</div>';
+
+  if (item.type === 'glossary' && item.entry) {
+    cardHtml += '<div style="font-size:0.82rem;line-height:1.5">';
+    cardHtml += '<strong>' + escapeHtml(item.entry.name || '') + '</strong>';
+    if (item.entry.nameEn) cardHtml += ' <span style="color:var(--tx-3)">' + escapeHtml(item.entry.nameEn) + '</span>';
+    cardHtml += '<br>';
+    cardHtml += '<span style="color:var(--tx-2)">카테고리: ' + escapeHtml(item.entry.category || '') + ' · 레벨: ' + escapeHtml(item.entry.level || '') + '</span><br>';
+    cardHtml += '<span style="color:var(--tx-2)">' + escapeHtml(item.entry.desc || '') + '</span>';
+    cardHtml += '</div>';
+  } else if (item.type === 'resource' && item.entry) {
+    cardHtml += '<div style="font-size:0.82rem;line-height:1.5">';
+    cardHtml += '<strong>' + escapeHtml(item.entry.title || '') + '</strong><br>';
+    if (item.entry.url) cardHtml += '<span style="color:var(--blue);font-size:0.78rem">' + escapeHtml(item.entry.url) + '</span><br>';
+    cardHtml += '<span style="color:var(--tx-2)">' + escapeHtml(item.entry.desc || '') + '</span>';
+    cardHtml += '</div>';
+  } else if (item.type === 'techstack') {
+    cardHtml += '<div style="font-size:0.82rem"><strong>' + escapeHtml(String(item.entry || '')) + '</strong></div>';
+  }
+
+  // Store item data globally for button onclick
+  if (!window._adpAddItems) window._adpAddItems = [];
+  var itemIndex = window._adpAddItems.length;
+  window._adpAddItems.push(item);
+
+  cardHtml += '<div style="margin-top:8px;display:flex;gap:6px">';
+  cardHtml += '<button onclick="executeAdpAdd(' + itemIndex + ')" style="padding:5px 12px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:0.78rem;cursor:pointer;font-family:var(--font-main)">추가하기</button>';
+  cardHtml += '<button onclick="requestAdpEdit(' + itemIndex + ')" style="padding:5px 12px;background:var(--bg-3);color:var(--tx-1);border:1px solid var(--bd);border-radius:6px;font-size:0.78rem;cursor:pointer;font-family:var(--font-main)">수정 요청</button>';
+  cardHtml += '</div>';
+
+  cardHtml += '</div>';
+  return cardHtml;
+}
+
+// Execute add to PR
+function executeAdpAdd(itemIndex) {
+  var item = window._adpAddItems[itemIndex];
+  if (!item) return;
+
+  // Disable the button
+  event.target.disabled = true;
+  event.target.textContent = '처리 중...';
+
+  addToAdpPR(item.type, item.entry, item.file, item.description);
+}
+
+// Request edit - focus input with hint
+function requestAdpEdit(itemIndex) {
+  var input = document.getElementById('adpInput');
+  input.focus();
+  input.placeholder = '어떻게 수정할까요? (예: "레벨을 useful로 바꿔줘")';
+
+  // Reset placeholder after typing
+  input.addEventListener('input', function resetPlaceholder() {
+    input.placeholder = '내용을 입력하세요...';
+    input.removeEventListener('input', resetPlaceholder);
+  });
 }
 
 function escapeHtml(str) {

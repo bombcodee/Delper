@@ -46,14 +46,29 @@ export default async function handler(request) {
 - AI 탭: vibecoding, ai-usage, harness
 - 추천 리소스: 필독서, 커뮤니티, 학습채널, 유용한도구, 성공사례, 디자인리소스
 
-사용자가 내용을 입력하면:
-1. 어떤 타입인지 판단 (용어 / 리소스 링크 / 기술스택 / 섹션 내용)
-2. 어디에 넣을지 제안 (복수 가능)
-3. 새 카테고리가 필요하면 제안
-4. 구조화된 데이터 미리보기 생성
+용어집 태그 규칙:
+- 첫 번째 태그: 한글 발음/별칭 (color: "purple")
+- 두 번째 태그(선택): 영문 별칭 또는 관련 분야 (color: "teal")
 
-URL이 포함되면 리소스/링크로 판단.
-한국어로 답변. 간결하게.`,
+사용자가 콘텐츠 추가를 요청하면:
+1. 정확한 정보로 분류해 (모르는 건 추측하지 말고 "확인 필요"라고 해)
+2. 반드시 아래 형식의 태그를 응답에 포함해:
+
+용어 추가 시:
+<!--ADD_DATA:{"type":"glossary","file":"data/glossary-data.js","description":"용어 이름","entry":{"name":"용어명","nameEn":"English Name","category":"카테고리","level":"레벨","tags":[{"text":"한글태그","color":"purple"}],"desc":"설명"}}-->
+
+리소스/링크 추가 시:
+<!--ADD_DATA:{"type":"resource","file":"index.html","description":"리소스 설명","entry":{"title":"제목","url":"URL","desc":"설명","section":"섹션명"}}-->
+
+기술스택 추가 시:
+<!--ADD_DATA:{"type":"techstack","file":"data/tech-stack-data.js","description":"기술 이름","entry":"기술명"}-->
+
+규칙:
+- ADD_DATA 태그는 한 응답에 여러 개 가능 (여러 곳에 추가 제안 시)
+- 태그 앞뒤로 사람이 읽을 설명도 반드시 포함해
+- 사용자가 단순 질문만 하면 (추가 요청이 아니면) ADD_DATA 태그 없이 답변해
+- 정확하지 않은 정보는 절대 넣지 마. 특히 약어의 풀네임은 확실할 때만 적어
+- 한국어로 답변`,
         messages: history || [{ role: 'user', content: message }],
       }),
     });
